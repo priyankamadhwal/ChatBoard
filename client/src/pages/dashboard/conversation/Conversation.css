@@ -1,0 +1,88 @@
+.conversationContainer {
+  width: 50vw;
+  height: 100vh;
+  padding: 2%;
+}
+
+.chatroomPage {
+  display: flex;
+  width: 50vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.chatroomSection {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.chatroomContent {
+}
+
+.chatroomActions {
+  position: relative;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 72px;
+  grid-gap: 1rem;
+}
+
+.chatroomActions button {
+  height: 100%;
+}
+
+.message {
+  margin-bottom: 0.25rem;
+}
+
+.otherMessage {
+  color: #0099cc;
+  font-weight: bold;
+}
+
+.ownMessage {
+  color: #00cc00;
+  font-weight: bold;
+}
+
+.outerContainer {
+  position: relative;
+  width: 60vw;
+  height: 100%;
+}
+
+.sendMessageForm {
+  display: flex;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.input {
+  width: 100%;
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+}
+
+.emoji-picker {
+  position: absolute;
+  right: 10px;
+  z-index: 2;
+  bottom: 10vh;
+  background-color: white;
+}
+
+.sendButton {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979ff;
+  padding: 20px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+}

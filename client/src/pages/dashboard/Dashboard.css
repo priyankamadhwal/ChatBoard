@@ -1,0 +1,76 @@
+main.mainContent {
+  position: absolute;
+  top: -25px;
+  height: 87.5vh;
+  left: 300px;
+}
+
+.dashboardContainer {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+p.headerName {
+  color: #fafbfc;
+  margin: 0;
+}
+
+span.material-icons.MuiIcon-root.headerIcon {
+  color: #fafbfc;
+}
+
+div.MuiButtonBase-root.MuiListItem-root.chatroom.MuiListItem-gutters.MuiListItem-button
+  div {
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #fafbfc;
+  text-decoration: none;
+}
+
+div.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+}
+
+p.dashboardUsername {
+  color: #f50057;
+  font-size: 0.6em;
+  margin: 0;
+}
+
+.chatroomsOuterContainer {
+  width: 25vw;
+  height: 100vh;
+  padding: 2%;
+  background-color: #1a1a1d;
+}
+
+.chatroomsHeading {
+  color: #e6e6ff;
+  font-size: 1.3em;
+  padding-bottom: 20px;
+  font-weight: normal;
+  width: 100%;
+  text-align: center;
+}
+
+div.joinButton {
+  background-color: #f64f59;
+  padding: 0.25rem 1rem;
+  border-radius: 2px;
+}
+
+span.channelsHeading {
+  color: #e6e6ff;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  font-size: 1.5em;
+  width: 100%;
+}
