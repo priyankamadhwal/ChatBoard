@@ -1,7 +1,36 @@
-.usersList {
+.usersListOuterContainer {
   height: 100%;
   width: 27%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   background-color: rgba(26, 26, 29, 0.1);
+}
+
+.usersListInnerContainer {
+  height: 35%;
+  width: 50%;
+  padding: 6%;
+  overflow-y: scroll;
+  background-color: #f3f3f3;
+  border: 1px solid transparent;
+  box-shadow: 0 3px 6px rgba(61, 61, 61, 0.16);
+  border-radius: 4px;
+}
+
+.usersListHeading {
+  color: rgba(48, 46, 46, 0.925);
+  font-style: italic;
+  font-size: 0.9em;
+  margin: 4% 0;
+}
+
+span.material-icons.MuiIcon-root.fas.fa-circle {
+  font-size: 0.65em;
+  margin-right: 10px;
+  color: green;
+}
+
+material-icons .usersListOnlineUserInfo {
+  font-size: 0.2;
 }
