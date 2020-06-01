@@ -73,27 +73,27 @@ io.on("connection", (socket) => {
 
   socket.on("joinRoom", async ({ chatroomId }) => {
     const user = await User.findOne({ _id: socket.userId });
-    io.to(chatroomId).emit("newMessage", {
+    const newMessage = {
       message: user.username + " joined the channel!",
       username: "",
       userId: ADMINID,
-    });
+    };
+    io.to(chatroomId).emit("newMessage", newMessage);
     socket.join(chatroomId);
-    await newMessage.save();
   });
 
   socket.on("leaveRoom", async ({ chatroomId }) => {
     const user = await User.findOne({ _id: socket.userId });
-    io.to(chatroomId).emit("newMessage", {
+    const newMessage = {
       message: user.username + " left the channel!",
       username: "",
       userId: ADMINID,
-    });
+    };
+    io.to(chatroomId).emit("newMessage", newMessage);
     socket.leave(chatroomId);
-    await newMessage.save();
   });
 
-  socket.on("chatroomMessage", async ({ chatroomId, message }) => {
+  socket.on("newMessage", async ({ chatroomId, message }) => {
     if (message.trim().length > 0) {
       const user = await User.findOne({ _id: socket.userId });
       const newMessage = new Message({
@@ -106,7 +106,7 @@ io.on("connection", (socket) => {
         username: user.username,
         userId: socket.userId,
       });
-      await newMessage.save();
+      //await newMessage.save();
     }
   });
 });

@@ -1,6 +1,6 @@
 import React from "react";
-import axios from "axios";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,12 +15,10 @@ import Input from "./input/Input";
 import "./Conversation.css";
 
 const Conversation = (props) => {
-  const chatroomId = props.match.params.id;
   const socket = props.socket;
-  const [messages, setMessages] = React.useState([]);
-  const messageRef = React.useRef();
-  const [msg, setMsg] = React.useState("");
   const [userId, setUserId] = React.useState("");
+  const [messages, setMessages] = React.useState([]);
+  const [msg, setMsg] = React.useState("");
   const [chosenEmoji, setChosenEmoji] = React.useState(null);
   const [isEmojiPickerVisibile, setIsEmojiPickerVisibile] = React.useState(
     false
@@ -31,23 +29,53 @@ const Conversation = (props) => {
   };
 
   React.useEffect(() => {
-    //alert("mount");
-    getOldMessages();
-  }, [props.match.params.id]);
+    const token = localStorage.getItem("CC_Token");
+    if (token) {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      setUserId(payload.id);
+    }
+    if (socket) {
+      socket.on("newMessage", (message) => {
+        console.log(message);
+        const newMessages = [...messages, message];
+        setMessages(newMessages);
+      });
+    }
+  }, [messages]);
 
   React.useEffect(() => {
+    //alert("mount");
+    if (!socket) props.history.push("/");
+    getOldMessages();
+    if (socket) {
+      socket.emit("joinRoom", {
+        chatroomId: props.match.params.id,
+      });
+    }
     return () => {
-      //alert("unmount");
+      if (socket) {
+        socket.emit("leaveRoom", {
+          chatroomId: props.match.params.id,
+        });
+      }
     };
-  }, []);
+  }, [props.match.params.id]);
 
   React.useEffect(() => {
     if (props.leaveRoom != 0) leaveRoom();
   }, [props.leaveRoom]);
 
+  const leaveRoom = () => {
+    if (socket) {
+      socket.emit("leaveRoom", {
+        chatroomId: props.match.params.id,
+      });
+    }
+  };
+
   const getOldMessages = () => {
     axios
-      .get("http://localhost:8000/messages/" + chatroomId, {
+      .get("http://localhost:8000/messages/" + props.match.params.id, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("CC_Token"),
         },
@@ -56,101 +84,68 @@ const Conversation = (props) => {
         setMessages(response.data);
       })
       .catch((err) => {
-        //setTimeout(getOldMessages, 3000);
+        setTimeout(getOldMessages, 3000);
       });
   };
 
   const sendMessage = (event) => {
     if (event) event.preventDefault();
     if (socket) {
-      socket.emit("chatroomMessage", {
-        chatroomId,
+      socket.emit("newMessage", {
+        chatroomId: props.match.params.id,
         message: msg,
       });
       setMsg("");
     }
   };
 
-  React.useEffect(() => {
-    const token = localStorage.getItem("CC_Token");
-    if (token) {
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      setUserId(payload.id);
-    }
-
-    if (socket) {
-      socket.on("newMessage", (message) => {
-        const newMessages = [...messages, message];
-        setMessages(newMessages);
-      });
-    }
-    //eslint-disable-next-line
-  }, [messages]);
-
-  React.useEffect(() => {
-    //getOldMessages();
-    if (socket) {
-      socket.emit("joinRoom", {
-        chatroomId,
-      });
-    }
-
-    return () => {
-      //Component Unmount
-      leaveRoom();
-    };
-    //eslint-disable-next-line
-  }, []);
-
-  const leaveRoom = () => {
-    if (socket) {
-      socket.emit("leaveRoom", {
-        chatroomId,
-      });
-    }
-  };
-
   return (
     <div className='outerContainer'>
-      <div className='emoji-picker'>
-        {isEmojiPickerVisibile ? <Picker onEmojiClick={onEmojiClick} /> : null}
+      <div className='innerContainer'>
+        <div className='emoji-picker'>
+          {isEmojiPickerVisibile ? (
+            <Picker onEmojiClick={onEmojiClick} />
+          ) : null}
+        </div>
+        <Messages messages={messages} userId={userId} />
+        <div className='sendMessageForm'>
+          <form className='input' autoComplete='off'>
+            <TextField
+              className='messageInput'
+              id='outlined-basic'
+              type='text'
+              name='message'
+              placeholder='Type a message...'
+              value={msg}
+              variant='outlined'
+              onChange={(e) => {
+                setMsg(e.target.value);
+              }}
+              onKeyPress={(event) =>
+                event.key === "Enter" ? sendMessage(event) : null
+              }
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment>
+                    <IconButton
+                      onClick={() =>
+                        setIsEmojiPickerVisibile(!isEmojiPickerVisibile)
+                      }
+                    >
+                      <Icon>emoji_emotions</Icon>
+                    </IconButton>
+                    <IconButton onClick={sendMessage}>
+                      <Icon>send</Icon>
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </form>
+        </div>
       </div>
-      <Messages messages={messages} userId={userId} />
-      <div className='sendMessageForm'>
-        <form className='input' autocomplete='off'>
-          <TextField
-            id='outlined-basic'
-            fullWidth
-            type='text'
-            name='message'
-            placeholder='Type a message...'
-            value={msg}
-            variant='outlined'
-            inputRef={messageRef}
-            onChange={(e) => {
-              setMsg(e.target.value);
-            }}
-            onKeyPress={(event) =>
-              event.key === "Enter" ? sendMessage(event) : null
-            }
-            InputProps={{
-              endAdornment: (
-                <InputAdornment>
-                  <IconButton
-                    onClick={() =>
-                      setIsEmojiPickerVisibile(!isEmojiPickerVisibile)
-                    }
-                  >
-                    <Icon>emoji_emotions</Icon>
-                  </IconButton>
-                  <IconButton onClick={sendMessage}>
-                    <Icon>send</Icon>
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </form>
+      <div className='usersList'>
+        <h1>Users list</h1>
       </div>
     </div>
   );

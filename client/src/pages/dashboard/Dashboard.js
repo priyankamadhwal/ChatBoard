@@ -70,11 +70,17 @@ const Dashboard = (props) => {
   const [currentChatroom, setCurrentChatroom] = React.useState(null);
   const chatroomNameRef = React.createRef();
 
+  const loadCurrentChatroom = (chatrooms) => {
+    const chatroom = chatrooms.filter(
+      (chatroom) => chatroom._id === props.match.params.id
+    )[0];
+    setCurrentChatroom(chatroom);
+  };
+
   const getUser = (userId) => {
     axios
       .get("http://localhost:8000/user/" + userId)
       .then((response) => {
-        console.log(response);
         setUser(response.data);
       })
       .catch((err) => {
@@ -90,8 +96,8 @@ const Dashboard = (props) => {
         },
       })
       .then((response) => {
-        console.log(response);
         setChatrooms(response.data);
+        loadCurrentChatroom(response.data);
       })
       .catch((err) => {
         setTimeout(getChatrooms, 3000);
@@ -132,19 +138,12 @@ const Dashboard = (props) => {
       const payload = JSON.parse(atob(token.split(".")[1]));
       getUser(payload.id);
     }
-    //eslint-disable-next-line
-  }, []);
-
-  React.useEffect(() => {
     getChatrooms();
     // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
-    const chatroom = chatrooms.filter(
-      (chatroom) => chatroom._id === props.match.params.id
-    )[0];
-    setCurrentChatroom(chatroom);
+    loadCurrentChatroom(chatrooms);
     // eslint-disable-next-line
   }, [props.match.params.id]);
 
@@ -173,7 +172,7 @@ const Dashboard = (props) => {
       <span className='channelsHeading'>Channels</span>
       <List>
         {chatrooms.map((chatroom) => (
-          <Link to={"/chatroom/" + chatroom._id}>
+          <Link to={"/chatroom/" + chatroom._id} key={chatroom._id}>
             <ListItem button key={chatroom._id} className='chatroom'>
               <div>{chatroom.name}</div>
             </ListItem>

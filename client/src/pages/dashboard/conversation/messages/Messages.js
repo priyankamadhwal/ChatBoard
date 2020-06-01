@@ -19,6 +19,13 @@ const Messages = ({ messages, userId }) => {
                 </p>
               </div>
             </div>
+          ) : message.userId === "admin" ? (
+            <div className='messageContainer justifyCenter'>
+              <div className='messageBox backgroundWhite'>
+                <p className='messageText colorAdmin'>{message.message}</p>
+              </div>
+              <p className='sentText pl-10 '>{message.username}</p>
+            </div>
           ) : (
             <div className='messageContainer justifyStart'>
               <div className='messageBox backgroundLight'>

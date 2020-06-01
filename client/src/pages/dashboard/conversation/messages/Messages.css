@@ -55,6 +55,10 @@
   justify-content: flex-start;
 }
 
+.justifyCenter {
+  justify-content: center;
+}
+
 .justifyEnd {
   justify-content: flex-end;
 }
@@ -67,10 +71,19 @@
   color: #353535;
 }
 
+.colorAdmin {
+  color: #f50057;
+  font-size: 0.9em;
+}
+
 .backgroundBlue {
   background: #2196f3;
 }
 
 .backgroundLight {
   background: #ededed;
+}
+
+.backgroundWhite {
+  background: rgb(250, 250, 250);
 }

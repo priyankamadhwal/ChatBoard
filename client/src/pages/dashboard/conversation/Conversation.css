@@ -49,9 +49,28 @@
 }
 
 .outerContainer {
-  position: relative;
-  width: 60vw;
+  display: flex;
+  justify-content: space-between;
+  width: 78vw;
   height: 100%;
+}
+
+.innerContainer {
+  position: relative;
+  width: 73%;
+  height: 100%;
+}
+
+.usersList {
+  height: 100%;
+  width: 27%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(26, 26, 29, 0.1);
+}
+
+.input .messageInput {
+  width: 98.5%;
 }
 
 .sendMessageForm {
