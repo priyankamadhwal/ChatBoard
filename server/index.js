@@ -55,6 +55,39 @@ const Message = mongoose.model("Message");
 const User = mongoose.model("User");
 const ADMINID = "admin";
 
+const users = [];
+
+// Join user to chat
+function userJoin(id, username, chatroomId) {
+  const index = users.findIndex((user) => user.id == id);
+  if (index != -1) {
+    const user = users[index];
+    if (user.chatroomId == chatroomId) return;
+    else {
+      users.splice(index, 1);
+    }
+  }
+  const user = { id, username, chatroomId };
+  users.push(user);
+}
+
+// User leaves chat
+function userLeave(id) {
+  const index = users.findIndex((user) => user.id == id);
+  if (index != -1) {
+    users.splice(index, 1);
+  }
+}
+
+// Get room users
+function getRoomUsers(chatroomId) {
+  return users.filter((user) => user.chatroomId === chatroomId);
+}
+
+function getCurrentUser(id) {
+  return users.find((user) => user.id == id);
+}
+
 io.use(async (socket, next) => {
   try {
     const token = socket.handshake.query.token;
@@ -65,21 +98,37 @@ io.use(async (socket, next) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("Connected: " + socket.userId);
+  //console.log("Connected: " + socket.userId);
 
-  socket.on("disconnect", () => {
-    console.log("Disconnected: ", socket.userId);
+  socket.on("disconnect", async ({ chatroomId }) => {
+    const user = getCurrentUser(socket.userId);
+    const newMessage = {
+      message: user.username + " left the channel!",
+      username: "",
+      userId: ADMINID,
+    };
+    socket.broadcast.to(user.chatroomId).emit("newMessage", newMessage);
+    socket.leave(user.chatroomId);
+    userLeave(socket.userId);
+    io.to(user.chatroomId).emit("onlineUsers", {
+      users: getRoomUsers(user.chatroomId),
+    });
   });
 
   socket.on("joinRoom", async ({ chatroomId }) => {
     const user = await User.findOne({ _id: socket.userId });
+    userJoin(socket.userId, user.username, chatroomId);
     const newMessage = {
       message: user.username + " joined the channel!",
       username: "",
       userId: ADMINID,
     };
-    io.to(chatroomId).emit("newMessage", newMessage);
+    socket.broadcast.to(chatroomId).emit("newMessage", newMessage);
     socket.join(chatroomId);
+    // Send users and room info
+    io.to(chatroomId).emit("onlineUsers", {
+      users: getRoomUsers(chatroomId),
+    });
   });
 
   socket.on("leaveRoom", async ({ chatroomId }) => {
@@ -89,8 +138,12 @@ io.on("connection", (socket) => {
       username: "",
       userId: ADMINID,
     };
-    io.to(chatroomId).emit("newMessage", newMessage);
+    socket.broadcast.to(chatroomId).emit("newMessage", newMessage);
     socket.leave(chatroomId);
+    userLeave(socket.userId);
+    io.to(chatroomId).emit("onlineUsers", {
+      users: getRoomUsers(chatroomId),
+    });
   });
 
   socket.on("newMessage", async ({ chatroomId, message }) => {

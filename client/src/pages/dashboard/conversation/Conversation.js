@@ -10,6 +10,7 @@ import Picker from "emoji-picker-react";
 import ReactEmoji from "react-emoji";
 
 import Messages from "./messages/Messages";
+import UsersList from "../../../components/usersList/UsersList";
 import Input from "./input/Input";
 
 import "./Conversation.css";
@@ -18,6 +19,7 @@ const Conversation = (props) => {
   const socket = props.socket;
   const [userId, setUserId] = React.useState("");
   const [messages, setMessages] = React.useState([]);
+  const [onlineUsers, setOnlineUsers] = React.useState([]);
   const [msg, setMsg] = React.useState("");
   const [chosenEmoji, setChosenEmoji] = React.useState(null);
   const [isEmojiPickerVisibile, setIsEmojiPickerVisibile] = React.useState(
@@ -36,7 +38,6 @@ const Conversation = (props) => {
     }
     if (socket) {
       socket.on("newMessage", (message) => {
-        console.log(message);
         const newMessages = [...messages, message];
         setMessages(newMessages);
       });
@@ -44,8 +45,19 @@ const Conversation = (props) => {
   }, [messages]);
 
   React.useEffect(() => {
+    if (socket) {
+      socket.on("onlineUsers", (users) => {
+        console.log(users);
+        setOnlineUsers(users);
+      });
+    }
+  }, [onlineUsers]);
+
+  React.useEffect(() => {
     //alert("mount");
-    if (!socket) props.history.push("/");
+    if (!socket) {
+      props.history.push("/dashboard");
+    }
     getOldMessages();
     if (socket) {
       socket.emit("joinRoom", {
@@ -53,13 +65,9 @@ const Conversation = (props) => {
       });
     }
     return () => {
-      if (socket) {
-        socket.emit("leaveRoom", {
-          chatroomId: props.match.params.id,
-        });
-      }
+      leaveRoom();
     };
-  }, [props.match.params.id]);
+  }, [props.location.pathname]);
 
   React.useEffect(() => {
     if (props.leaveRoom != 0) leaveRoom();
@@ -144,9 +152,7 @@ const Conversation = (props) => {
           </form>
         </div>
       </div>
-      <div className='usersList'>
-        <h1>Users list</h1>
-      </div>
+      <UsersList onlineUsers={onlineUsers} />
     </div>
   );
 };

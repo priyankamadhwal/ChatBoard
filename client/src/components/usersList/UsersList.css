@@ -1,0 +1,7 @@
+.usersList {
+  height: 100%;
+  width: 27%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(26, 26, 29, 0.1);
+}
