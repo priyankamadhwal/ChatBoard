@@ -16,6 +16,8 @@ import axios from "axios";
 import { Link, Switch, Route, withRouter } from "react-router-dom";
 import Conversation from "./conversation/Conversation";
 import makeToast from "../../components/Toaster";
+import ChatroomsList from "../../components/chatoomsList/ChatroomsList";
+import Welcome from "../../components/welcome/Welcome";
 
 import "./Dashboard.css";
 
@@ -167,18 +169,8 @@ const Dashboard = (props) => {
           {user ? "Hey " + user.username + "!" : ""}
         </p>
       </div>
-
       <Divider />
-      <span className='channelsHeading'>Channels</span>
-      <List>
-        {chatrooms.map((chatroom) => (
-          <Link to={"/chatroom/" + chatroom._id} key={chatroom._id}>
-            <ListItem button key={chatroom._id} className='chatroom'>
-              <div>{chatroom.name}</div>
-            </ListItem>
-          </Link>
-        ))}
-      </List>
+      <ChatroomsList chatrooms={chatrooms} />
     </div>
   );
 
@@ -241,13 +233,7 @@ const Dashboard = (props) => {
       <main className='mainContent'>
         <div className={classes.toolbar} />
         <Switch>
-          <Route
-            exact
-            path='/dashboard'
-            render={() => {
-              return <div>Hey there!</div>;
-            }}
-          />
+          <Route exact path='/dashboard' render={Welcome} />
           <Route
             exact
             path='/chatroom/:id'

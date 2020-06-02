@@ -97,3 +97,12 @@
   border: none;
   width: 20%;
 }
+
+.rightContent {
+  width: 27%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(26, 26, 29, 0.1);
+}

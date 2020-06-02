@@ -65,12 +65,3 @@ div.joinButton {
   padding: 0.25rem 1rem;
   border-radius: 2px;
 }
-
-span.channelsHeading {
-  color: #e6e6ff;
-  display: flex;
-  justify-content: center;
-  padding-top: 15px;
-  font-size: 1.5em;
-  width: 100%;
-}

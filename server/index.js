@@ -55,6 +55,9 @@ const Message = mongoose.model("Message");
 const User = mongoose.model("User");
 const ADMINID = "admin";
 
+var Sentiment = require("sentiment");
+var sentiment = new Sentiment();
+
 const users = [];
 
 // Join user to chat
@@ -102,17 +105,19 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", async ({ chatroomId }) => {
     const user = getCurrentUser(socket.userId);
-    const newMessage = {
-      message: user.username + " left the channel!",
-      username: "",
-      userId: ADMINID,
-    };
-    socket.broadcast.to(user.chatroomId).emit("newMessage", newMessage);
-    socket.leave(user.chatroomId);
-    userLeave(socket.userId);
-    io.to(user.chatroomId).emit("onlineUsers", {
-      users: getRoomUsers(user.chatroomId),
-    });
+    if (user) {
+      const newMessage = {
+        message: user.username + " left the channel!",
+        username: "",
+        userId: ADMINID,
+      };
+      socket.broadcast.to(user.chatroomId).emit("newMessage", newMessage);
+      socket.leave(user.chatroomId);
+      userLeave(socket.userId);
+      io.to(user.chatroomId).emit("onlineUsers", {
+        users: getRoomUsers(user.chatroomId),
+      });
+    }
   });
 
   socket.on("joinRoom", async ({ chatroomId }) => {
@@ -149,15 +154,20 @@ io.on("connection", (socket) => {
   socket.on("newMessage", async ({ chatroomId, message }) => {
     if (message.trim().length > 0) {
       const user = await User.findOne({ _id: socket.userId });
+      const sentimentRes = sentiment.analyze(message);
+
       const newMessage = new Message({
         chatroom: chatroomId,
         user: socket.userId,
+        sentiment: sentimentRes,
         message,
       });
+
       io.to(chatroomId).emit("newMessage", {
         message,
         username: user.username,
         userId: socket.userId,
+        sentiment: sentimentRes,
       });
       //await newMessage.save();
     }

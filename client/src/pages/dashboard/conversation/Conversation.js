@@ -11,6 +11,7 @@ import ReactEmoji from "react-emoji";
 
 import Messages from "./messages/Messages";
 import UsersList from "../../../components/usersList/UsersList";
+import SemanticAnalysis from "../../../components/semantic-analysis/SemanticAnalysis";
 import Input from "./input/Input";
 
 import "./Conversation.css";
@@ -39,6 +40,7 @@ const Conversation = (props) => {
     if (socket) {
       socket.on("newMessage", (message) => {
         const newMessages = [...messages, message];
+        console.log(message);
         setMessages(newMessages);
       });
     }
@@ -152,7 +154,10 @@ const Conversation = (props) => {
           </form>
         </div>
       </div>
-      <UsersList onlineUsers={onlineUsers} />
+      <div className='rightContent'>
+        <UsersList onlineUsers={onlineUsers} />
+        <SemanticAnalysis />
+      </div>
     </div>
   );
 };

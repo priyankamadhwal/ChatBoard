@@ -1,6 +1,7 @@
 .usersListOuterContainer {
-  height: 100%;
-  width: 27%;
+  width: 100%;
+  height: 35%;
+  padding: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,8 +9,8 @@
 }
 
 .usersListInnerContainer {
-  height: 35%;
   width: 50%;
+  height: 100%;
   padding: 6%;
   overflow-y: scroll;
   background-color: #f3f3f3;
