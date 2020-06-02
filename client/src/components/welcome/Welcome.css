@@ -1,7 +1,17 @@
 .welcomeOuterContainer {
+  position: absolute;
+  top: 0;
+  width: 78vw;
+  height: 103.5vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  background-color: #cccccc;
+}
+
+.intro {
+  width: 40%;
+  line-height: 1.8em;
+  text-align: center;
 }
