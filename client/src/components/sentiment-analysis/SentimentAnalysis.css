@@ -1,4 +1,4 @@
-.semanticAnalysisOuterContainer {
+.sentimentAnalysisOuterContainer {
   margin-top: 5%;
   height: 60%;
   width: 90%;
@@ -9,8 +9,12 @@
   background-color: #1a1a1d;
 }
 
-.semanticAnalysisInnerContainer {
+.sentimentAnalysisInnerContainer {
 }
 
-.semanticAnalysisHeading {
+.sentimentAnalysisHeading {
+  padding: 3%;
+  font-style: italic;
+  font-weight: bold;
+  color: white;
 }

@@ -53,6 +53,7 @@ const io = require("socket.io")(server);
 const jwt = require("jwt-then");
 const Message = mongoose.model("Message");
 const User = mongoose.model("User");
+const Chatroom = mongoose.model("Chatroom");
 const ADMINID = "admin";
 
 var Sentiment = require("sentiment");
@@ -169,6 +170,56 @@ io.on("connection", (socket) => {
         userId: socket.userId,
         sentiment: sentimentRes,
       });
+
+      const chatroom = await Chatroom.findOne({ _id: chatroomId });
+      Chatroom.updateOne(
+        { _id: chatroomId },
+        {
+          $set: {
+            totalSentimentScore:
+              chatroom.totalSentimentScore + sentimentRes.score,
+            totalMessages: chatroom.totalMessages + 1,
+            positive: chatroom.positive + (sentimentRes.score > 1 ? 1 : 0),
+            neutral:
+              chatroom.neutral +
+              (sentimentRes.score <= 1 && sentimentRes.score >= -1 ? 1 : 0),
+            negative: chatroom.negative + (sentimentRes.score < -1 ? 1 : 0),
+          },
+        },
+        function (err, affected, resp) {
+          //if (err) console.log(err.message);
+          //console.log(affected);
+        }
+      );
+
+      io.to(chatroomId).emit("updateSentiment", {
+        totalSentimentScore: chatroom.totalSentimentScore + sentimentRes.score,
+        totalMessages: chatroom.totalMessages + 1,
+        positive: chatroom.positive + (sentimentRes.score > 1 ? 1 : 0),
+        neutral:
+          chatroom.neutral +
+          (sentimentRes.score <= 1 && sentimentRes.score >= -1 ? 1 : 0),
+        negative: chatroom.negative + (sentimentRes.score < -1 ? 1 : 0),
+      });
+
+      User.updateOne(
+        { _id: socket.userId },
+        {
+          $set: {
+            totalSentimentScore: user.totalSentimentScore + sentimentRes.score,
+            totalMessages: user.totalMessages + 1,
+            positive: user.positive + (sentimentRes.score > 1 ? 1 : 0),
+            neutral:
+              user.neutral +
+              (sentimentRes.score <= 1 && sentimentRes.score >= -1 ? 1 : 0),
+            negative: user.negative + (sentimentRes.score < -1 ? 1 : 0),
+          },
+        },
+        function (err, affected, resp) {
+          //if (err) console.log(err.message);
+          //console.log(affected);
+        }
+      );
       //await newMessage.save();
     }
   });

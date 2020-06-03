@@ -1,5 +1,6 @@
 import React from "react";
 import Icon from "@material-ui/core/Icon";
+import Divider from "@material-ui/core/Divider";
 
 import "./UsersList.css";
 
@@ -15,6 +16,7 @@ const UsersList = ({ onlineUsers }) => {
               <div key={i} className='usersListOnlineUserInfo'>
                 <Icon className='fas fa-circle' />
                 <span>{user.username}</span>
+                <Divider />
               </div>
             ))
           : null}

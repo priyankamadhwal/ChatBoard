@@ -11,7 +11,7 @@ import ReactEmoji from "react-emoji";
 
 import Messages from "./messages/Messages";
 import UsersList from "../../../components/usersList/UsersList";
-import SemanticAnalysis from "../../../components/semantic-analysis/SemanticAnalysis";
+import SentimentAnalysis from "../../../components/sentiment-analysis/SentimentAnalysis";
 import Input from "./input/Input";
 
 import "./Conversation.css";
@@ -21,6 +21,7 @@ const Conversation = (props) => {
   const [userId, setUserId] = React.useState("");
   const [messages, setMessages] = React.useState([]);
   const [onlineUsers, setOnlineUsers] = React.useState([]);
+  const [channelSentiment, setChannelSentiment] = React.useState(null);
   const [msg, setMsg] = React.useState("");
   const [chosenEmoji, setChosenEmoji] = React.useState(null);
   const [isEmojiPickerVisibile, setIsEmojiPickerVisibile] = React.useState(
@@ -40,11 +41,13 @@ const Conversation = (props) => {
     if (socket) {
       socket.on("newMessage", (message) => {
         const newMessages = [...messages, message];
-        console.log(message);
         setMessages(newMessages);
       });
+      socket.on("updateSentiment", (sentiment) => {
+        setChannelSentiment(sentiment);
+      });
     }
-  }, [messages]);
+  }, [messages, channelSentiment]);
 
   React.useEffect(() => {
     if (socket) {
@@ -156,7 +159,7 @@ const Conversation = (props) => {
       </div>
       <div className='rightContent'>
         <UsersList onlineUsers={onlineUsers} />
-        <SemanticAnalysis />
+        <SentimentAnalysis sentiment={channelSentiment} />
       </div>
     </div>
   );
