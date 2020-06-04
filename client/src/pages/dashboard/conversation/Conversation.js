@@ -43,11 +43,8 @@ const Conversation = (props) => {
         const newMessages = [...messages, message];
         setMessages(newMessages);
       });
-      socket.on("updateSentiment", (sentiment) => {
-        setChannelSentiment(sentiment);
-      });
     }
-  }, [messages, channelSentiment]);
+  }, [messages]);
 
   React.useEffect(() => {
     if (socket) {
@@ -73,6 +70,14 @@ const Conversation = (props) => {
       leaveRoom();
     };
   }, [props.location.pathname]);
+
+  React.useEffect(() => {
+    if (socket) {
+      socket.on("updateSentiment", (sentiment) => {
+        setChannelSentiment(sentiment);
+      });
+    }
+  }, [props.chatroom]);
 
   React.useEffect(() => {
     if (props.leaveRoom != 0) leaveRoom();

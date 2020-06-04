@@ -18,3 +18,27 @@
   font-weight: bold;
   color: white;
 }
+
+.sentimentAnalysisData {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.channelSentimentTotalMessages {
+  color: #2196f3;
+  font-size: 1.2em;
+}
+
+.channelOverallSentiment div,
+.channelOverallSentiment span {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
+import Icon from "@material-ui/core/Icon";
 
 import "./SentimentAnalysis.css";
 
@@ -12,27 +13,47 @@ const SentimentAnalysis = (props) => {
 
   return (
     <div className='sentimentAnalysisOuterContainer'>
-      <span className='sentimentAnalysisHeading'>Sentiment Analysis</span>
-      {sentiment
-        ? sentiment.totalMessages + " " + sentiment.totalSentimentScore
-        : ""}
       {sentiment ? (
-        <Doughnut
-          data={{
-            labels: ["Positive", "Neutral", "Negative"],
-            datasets: [
-              {
-                data: [
-                  sentiment.positive,
-                  sentiment.neutral,
-                  sentiment.negative,
-                ],
-                backgroundColor: ["#2ff732", "#f7fa43", "#ff3b21"],
-              },
-            ],
-          }}
-          height={250}
-        />
+        <div className='sentimentAnalysisData'>
+          <span className='sentimentAnalysisHeading'>
+            Sentiment Distribution
+          </span>
+          <div className='channelSentimentTotalMessages'>
+            {"Total Messages : " + sentiment.totalMessages}
+          </div>
+          <Doughnut
+            data={{
+              labels: ["Positive", "Neutral", "Negative"],
+              datasets: [
+                {
+                  data: [
+                    sentiment.positive,
+                    sentiment.neutral,
+                    sentiment.negative,
+                  ],
+                  backgroundColor: ["#5BE12C", "#F5CD19", "#EA4228"],
+                },
+              ],
+            }}
+            height={200}
+          />
+          <div className='channelOverallSentiment'>
+            {sentiment.positive > sentiment.neutral &&
+            sentiment.positive > sentiment.negative ? (
+              <div>
+                <div>POSITIVE</div> <Icon className='fas fa-grin' />
+              </div>
+            ) : sentiment.neutral > sentiment.negative ? (
+              <div>
+                <div>NEUTRAL</div> <Icon className='fas fa-meh' />
+              </div>
+            ) : (
+              <div>
+                <div>NEGATIVE</div> <Icon className='fas fa-frown-open' />
+              </div>
+            )}
+          </div>
+        </div>
       ) : (
         ""
       )}

@@ -2,7 +2,8 @@
   position: absolute;
   top: 0;
   width: 78vw;
-  height: 103.5vh;
+  height: 89.5vh;
+  margin-top: 14vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,8 +11,67 @@
   background-color: #cccccc;
 }
 
+.welcomeOuterContainer h1 {
+  margin: 0;
+}
+
 .intro {
   width: 40%;
-  line-height: 1.8em;
   text-align: center;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+p.summaryHeading {
+  font-size: 2em;
+  color: #2196f3;
+  margin: 10px;
+}
+
+p.summaryTotalMessages {
+  font-size: 1.3em;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+div.summarySentimentsSection {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+div.summarySentiment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.summarySentiment .sentimentIcon {
+  font-size: 3em;
+  color: #1a1a1d;
+}
+
+div.summarySentiment .sentimentDesc {
+  font-size: 0.8em;
+  color: #1a1a1d;
+  line-height: 2em;
+}
+
+div.summarySentiment .sentimentPerc {
+  font-size: 1.5em;
+  color: #1a1a1d;
+  font-weight: 900;
+}
+
+span.summaryOverallSentiment {
+  color: #f30889;
+  font-weight: 900;
+  font-size: 1.2em;
 }

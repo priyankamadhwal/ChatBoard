@@ -12,6 +12,7 @@
   "author": "Priyanka Madhwal",
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^5.2.0",
+    "react-gauge-chart": "^0.2.5"
   }
 }

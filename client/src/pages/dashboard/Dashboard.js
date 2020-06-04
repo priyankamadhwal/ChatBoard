@@ -233,7 +233,11 @@ const Dashboard = (props) => {
       <main className='mainContent'>
         <div className={classes.toolbar} />
         <Switch>
-          <Route exact path='/dashboard' render={Welcome} />
+          <Route
+            exact
+            path='/dashboard'
+            render={() => <Welcome user={user} />}
+          />
           <Route
             exact
             path='/chatroom/:id'
