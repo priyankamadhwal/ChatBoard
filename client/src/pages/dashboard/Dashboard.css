@@ -21,7 +21,7 @@ span.material-icons.MuiIcon-root.headerIcon {
   color: #fafbfc;
 }
 
-div.MuiButtonBase-root.MuiListItem-root.chatroom.MuiListItem-gutters.MuiListItem-button
+div.MuiButtonBase-root.MuiListItem-root.channel.MuiListItem-gutters.MuiListItem-button
   div {
   padding-left: 30px;
   padding-right: 30px;
@@ -44,14 +44,14 @@ p.dashboardUsername {
   margin: 0;
 }
 
-.chatroomsOuterContainer {
+.channelsOuterContainer {
   width: 25vw;
   height: 100vh;
   padding: 2%;
   background-color: #1a1a1d;
 }
 
-.chatroomsHeading {
+.channelsHeading {
   color: #e6e6ff;
   font-size: 1.3em;
   padding-bottom: 20px;

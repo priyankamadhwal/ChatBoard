@@ -1,4 +1,4 @@
-.chatroomPage {
+.channelPage {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   background-color: #1a1a1d;
 }
 
-.chatroomSection {
+.channelSection {
   width: 100%;
   height: 100%;
   margin: auto;
@@ -15,7 +15,7 @@
   background-color: #1a1a1d;
 }
 
-.chatroomContent {
+.channelContent {
   position: absolute;
   top: 2.5rem;
   left: 0;
@@ -25,7 +25,7 @@
   overflow: auto;
 }
 
-.chatroomActions {
+.channelActions {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -37,7 +37,7 @@
   border-top: 1px solid #eee;
 }
 
-.chatroomActions button {
+.channelActions button {
   height: 100%;
 }
 

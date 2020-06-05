@@ -7,7 +7,7 @@ span.channelsHeading {
   width: 100%;
 }
 
-div.chatroomsListOuterContainer {
+div.channelsListOuterContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

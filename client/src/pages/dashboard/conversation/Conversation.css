@@ -4,7 +4,7 @@
   padding: 2%;
 }
 
-.chatroomPage {
+.channelPage {
   display: flex;
   width: 50vw;
   height: 100vh;
@@ -13,16 +13,16 @@
   height: 75vh;
 }
 
-.chatroomSection {
+.channelSection {
   width: 100%;
   height: 100%;
   margin: auto;
 }
 
-.chatroomContent {
+.channelContent {
 }
 
-.chatroomActions {
+.channelActions {
   position: relative;
   bottom: 0;
   display: grid;
@@ -30,7 +30,7 @@
   grid-gap: 1rem;
 }
 
-.chatroomActions button {
+.channelActions button {
   height: 100%;
 }
 

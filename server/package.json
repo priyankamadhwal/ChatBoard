@@ -1,7 +1,7 @@
 {
   "name": "chatboard-server",
   "version": "1.0.0",
-  "description": "Server: a real-time chat application",
+  "description": "Chatboad Server: a real-time chat application with sentiment analysis",
   "main": "index.js",
   "scripts": {
     "start": "nodemon"

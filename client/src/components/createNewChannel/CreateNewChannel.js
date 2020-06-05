@@ -12,15 +12,15 @@ import makeToast from "../Toaster";
 import "./CreateNewChannel.css";
 
 const CreateNewChannel = () => {
-  const chatroomNameRef = React.createRef();
+  const channelNameRef = React.createRef();
 
   const createChannel = () => {
-    const chatroomName = chatroomNameRef.current.value;
+    const channelName = channelNameRef.current.value;
 
     axios
       .post(
-        "http://localhost:8000/chatroom",
-        { name: chatroomName },
+        "http://localhost:8000/channel",
+        { name: channelName },
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("CC_Token"),
@@ -53,7 +53,7 @@ const CreateNewChannel = () => {
           name='message'
           placeholder='Enter a topic'
           variant='outlined'
-          inputRef={chatroomNameRef}
+          inputRef={channelNameRef}
           InputProps={{
             endAdornment: (
               <InputAdornment>

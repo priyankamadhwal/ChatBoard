@@ -62,14 +62,15 @@ const Conversation = (props) => {
     }
     getOldMessages();
     if (socket) {
-      socket.emit("joinRoom", {
-        chatroomId: props.match.params.id,
+      socket.emit("joinChannel", {
+        channelId: props.match.params.id,
+        username: props.user.username,
       });
     }
     return () => {
-      leaveRoom();
+      leaveChannel();
     };
-  }, [props.location.pathname]);
+  }, [props.match.params.id]);
 
   React.useEffect(() => {
     if (socket) {
@@ -77,16 +78,17 @@ const Conversation = (props) => {
         setChannelSentiment(sentiment);
       });
     }
-  }, [props.chatroom]);
+  }, [props.channel]);
 
   React.useEffect(() => {
-    if (props.leaveRoom != 0) leaveRoom();
-  }, [props.leaveRoom]);
+    if (props.leaveChannel != 0) leaveChannel();
+  }, [props.leaveChannel]);
 
-  const leaveRoom = () => {
+  const leaveChannel = () => {
     if (socket) {
-      socket.emit("leaveRoom", {
-        chatroomId: props.match.params.id,
+      socket.emit("leaveChannel", {
+        channelId: props.match.params.id,
+        username: props.user.username,
       });
     }
   };
@@ -110,7 +112,8 @@ const Conversation = (props) => {
     if (event) event.preventDefault();
     if (socket) {
       socket.emit("newMessage", {
-        chatroomId: props.match.params.id,
+        username: props.user.username,
+        channelId: props.match.params.id,
         message: msg,
       });
       setMsg("");

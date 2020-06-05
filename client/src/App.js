@@ -50,7 +50,7 @@ function App() {
         />
         <Route
           exact
-          path={["/dashboard", "/chatroom/:id"]}
+          path={["/dashboard", "/channel/:id"]}
           render={() => <Dashboard socket={socket} />}
         />
       </Switch>

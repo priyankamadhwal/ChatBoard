@@ -1,11 +1,11 @@
-.chatroomsOuterContainer {
+.channelsOuterContainer {
   width: 25vw;
   height: 100vh;
   padding: 2%;
   background-color: #1a1a1d;
 }
 
-.chatroomsHeading {
+.channelsHeading {
   color: #e6e6ff;
   font-size: 1.3em;
   padding-bottom: 20px;

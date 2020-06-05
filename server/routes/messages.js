@@ -5,7 +5,7 @@ const messagesController = require("../controllers/messagesController");
 const auth = require("../middlewares/auth");
 
 router.get(
-  "/:chatroomId",
+  "/:channelId",
   auth,
   catchErrors(messagesController.getAllMessagesInRoom)
 );

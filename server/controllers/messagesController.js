@@ -3,7 +3,7 @@ const Message = mongoose.model("Message");
 
 exports.getAllMessagesInRoom = async (req, res) => {
   const messages = await Message.find({
-    chatroom: req.params.chatroomId,
+    channel: req.params.channelId,
   }).populate({
     path: "user",
   });

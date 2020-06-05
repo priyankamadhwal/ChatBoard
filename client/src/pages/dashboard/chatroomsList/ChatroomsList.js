@@ -4,34 +4,34 @@ import { Link } from "react-router-dom";
 
 import makeToast from "../../../components/Toaster";
 
-import "./ChatroomsList.css";
+import "./ChannelsList.css";
 
-const ChatroomsList = () => {
-  const [chatrooms, setChatrooms] = React.useState([]);
-  const chatroomNameRef = React.createRef();
+const ChannelsList = () => {
+  const [channels, setChannels] = React.useState([]);
+  const channelNameRef = React.createRef();
 
-  const getChatrooms = () => {
+  const getChannels = () => {
     axios
-      .get("http://localhost:8000/chatroom", {
+      .get("http://localhost:8000/channel", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("CC_Token"),
         },
       })
       .then((response) => {
-        setChatrooms(response.data);
+        setChannels(response.data);
       })
       .catch((err) => {
-        setTimeout(getChatrooms, 3000);
+        setTimeout(getChannels, 3000);
       });
   };
 
-  const createChatroom = () => {
-    const chatroomName = chatroomNameRef.current.value;
+  const createChannel = () => {
+    const channelName = channelNameRef.current.value;
 
     axios
       .post(
-        "http://localhost:8000/chatroom",
-        { name: chatroomName },
+        "http://localhost:8000/channel",
+        { name: channelName },
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("CC_Token"),
@@ -54,30 +54,30 @@ const ChatroomsList = () => {
   };
 
   React.useEffect(() => {
-    getChatrooms();
+    getChannels();
     // eslint-disable-next-line
   }, []);
 
   return (
-    <div className='chatroomsOuterContainer'>
-      <div className='chatroomsHeading'>ChatBoard</div>
+    <div className='channelsOuterContainer'>
+      <div className='channelsHeading'>ChatBoard</div>
       <div>
         <div className='inputGroup'>
           <input
             type='text'
-            name='chatroomName'
-            id='chatroomName'
-            ref={chatroomNameRef}
-            placeholder='Enter chatroom name'
+            name='channelName'
+            id='channelName'
+            ref={channelNameRef}
+            placeholder='Enter channel name'
           />
         </div>
       </div>
-      <button onClick={createChatroom}>Create Chatroom</button>
-      <div className='chatrooms'>
-        {chatrooms.map((chatroom) => (
-          <div key={chatroom._id} className='chatroom'>
-            <div>{chatroom.name}</div>
-            <Link to={"/chatroom/" + chatroom._id}>
+      <button onClick={createChannel}>Create Channel</button>
+      <div className='channels'>
+        {channels.map((channel) => (
+          <div key={channel._id} className='channel'>
+            <div>{channel.name}</div>
+            <Link to={"/channel/" + channel._id}>
               <div className='joinButton'>Join</div>
             </Link>
           </div>
@@ -87,4 +87,4 @@ const ChatroomsList = () => {
   );
 };
 
-export default ChatroomsList;
+export default ChannelsList;

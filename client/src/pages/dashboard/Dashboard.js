@@ -16,7 +16,7 @@ import axios from "axios";
 import { Link, Switch, Route, withRouter } from "react-router-dom";
 import Conversation from "./conversation/Conversation";
 import makeToast from "../../components/Toaster";
-import ChatroomsList from "../../components/chatoomsList/ChatroomsList";
+import ChannelsList from "../../components/channelsList/ChannelsList";
 import Welcome from "../../components/welcome/Welcome";
 
 import "./Dashboard.css";
@@ -67,16 +67,16 @@ const Dashboard = (props) => {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [user, setUser] = React.useState(null);
-  const [chatrooms, setChatrooms] = React.useState([]);
-  const [leaveRoom, doLeaveRoom] = React.useState(0);
-  const [currentChatroom, setCurrentChatroom] = React.useState(null);
-  const chatroomNameRef = React.createRef();
+  const [channels, setChannels] = React.useState([]);
+  const [leaveChannel, doleaveChannel] = React.useState(0);
+  const [currentChannel, setCurrentChannel] = React.useState(null);
+  const channelNameRef = React.createRef();
 
-  const loadCurrentChatroom = (chatrooms) => {
-    const chatroom = chatrooms.filter(
-      (chatroom) => chatroom._id === props.match.params.id
+  const loadCurrentChannel = (channels) => {
+    const channel = channels.filter(
+      (channel) => channel._id === props.match.params.id
     )[0];
-    setCurrentChatroom(chatroom);
+    setCurrentChannel(channel);
   };
 
   const getUser = (userId) => {
@@ -90,29 +90,29 @@ const Dashboard = (props) => {
       });
   };
 
-  const getChatrooms = () => {
+  const getChannels = () => {
     axios
-      .get("http://localhost:8000/chatroom", {
+      .get("http://localhost:8000/channel", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("CC_Token"),
         },
       })
       .then((response) => {
-        setChatrooms(response.data);
-        loadCurrentChatroom(response.data);
+        setChannels(response.data);
+        loadCurrentChannel(response.data);
       })
       .catch((err) => {
-        setTimeout(getChatrooms, 3000);
+        setTimeout(getChannels, 3000);
       });
   };
 
-  const createChatroom = () => {
-    const chatroomName = chatroomNameRef.current.value;
+  const createChannel = () => {
+    const channelName = channelNameRef.current.value;
 
     axios
       .post(
-        "http://localhost:8000/chatroom",
-        { name: chatroomName },
+        "http://localhost:8000/channel",
+        { name: channelName },
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("CC_Token"),
@@ -140,17 +140,17 @@ const Dashboard = (props) => {
       const payload = JSON.parse(atob(token.split(".")[1]));
       getUser(payload.id);
     }
-    getChatrooms();
+    getChannels();
     // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
-    loadCurrentChatroom(chatrooms);
+    loadCurrentChannel(channels);
     // eslint-disable-next-line
   }, [props.match.params.id]);
 
   const logout = () => {
-    doLeaveRoom(leaveRoom + 1);
+    doleaveChannel(leaveChannel + 1);
     localStorage.removeItem("CC_Token");
     props.history.push("/");
   };
@@ -170,7 +170,7 @@ const Dashboard = (props) => {
         </p>
       </div>
       <Divider />
-      <ChatroomsList chatrooms={chatrooms} />
+      <ChannelsList channels={channels} />
     </div>
   );
 
@@ -192,7 +192,7 @@ const Dashboard = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' noWrap>
-            {currentChatroom ? currentChatroom.name : "Join a channel!"}
+            {currentChannel ? currentChannel.name : "Join a channel!"}
           </Typography>
           <div onClick={logout}>
             <IconButton className='fas fa-power-off' />
@@ -240,13 +240,13 @@ const Dashboard = (props) => {
           />
           <Route
             exact
-            path='/chatroom/:id'
+            path='/channel/:id'
             render={() => (
               <Conversation
                 socket={props.socket}
                 user={user}
-                chatroom={currentChatroom}
-                leaveRoom={leaveRoom}
+                channel={currentChannel}
+                leaveChannel={leaveChannel}
               />
             )}
           />
