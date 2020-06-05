@@ -1,11 +1,9 @@
 import React from "react";
-import { Link, Switch, Route, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 
-import CreateNewChannel from "../createNewChannel/CreateNewChannel";
-
-import "./ChannelsList.css";
+import NewChannel from "./NewChannel";
 
 const ChannelsList = ({ channels }) => {
   return (
@@ -22,7 +20,7 @@ const ChannelsList = ({ channels }) => {
           ))}
         </List>
       </div>
-      <CreateNewChannel />
+      <NewChannel />
     </div>
   );
 };

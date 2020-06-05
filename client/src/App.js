@@ -21,13 +21,13 @@ function App() {
       });
 
       newSocket.on("connect", () => {
-        makeToast("success", "Socket Connected!");
+        //makeToast("success", "Socket Connected!");
       });
 
       newSocket.on("disconnect", () => {
         setSocket(null);
         setTimeout(setupSocket, 3000);
-        makeToast("error", "Socket Disconnected!");
+        //makeToast("error", "Socket Disconnected!");
       });
 
       setSocket(newSocket);

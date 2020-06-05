@@ -2,10 +2,10 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import Icon from "@material-ui/core/Icon";
 
-import "./SentimentAnalysis.css";
+import { GET } from "../utils/api";
 
 const SentimentAnalysis = (props) => {
-  const [sentiment, setSentiment] = React.useState(null);
+  const [sentiment, setSentiment] = React.useState(props.sentiment);
 
   React.useEffect(() => {
     setSentiment(props.sentiment);

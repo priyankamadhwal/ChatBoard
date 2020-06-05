@@ -2,8 +2,6 @@ import React from "react";
 import Icon from "@material-ui/core/Icon";
 import Divider from "@material-ui/core/Divider";
 
-import "./UsersList.css";
-
 const UsersList = ({ onlineUsers }) => {
   return (
     <div className='usersListOuterContainer'>

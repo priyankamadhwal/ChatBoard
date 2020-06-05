@@ -3,8 +3,6 @@ import ReactEmoji from "react-emoji";
 import GaugeChart from "react-gauge-chart";
 import Icon from "@material-ui/core/Icon";
 
-import "./Welcome.css";
-
 const Welcome = (props) => {
   const [summary, setSummary] = React.useState(null);
 

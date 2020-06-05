@@ -4,22 +4,19 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
-import axios from "axios";
-import { Link, Switch, Route, withRouter } from "react-router-dom";
-import Conversation from "./conversation/Conversation";
-import makeToast from "../../components/Toaster";
-import ChannelsList from "../../components/channelsList/ChannelsList";
-import Welcome from "../../components/welcome/Welcome";
+import { Switch, Route, withRouter } from "react-router-dom";
 
-import "./Dashboard.css";
+import Channel from "./Channel";
+import ChannelsList from "../../components/ChannelsList";
+import Welcome from "./Welcome";
+
+import { GET } from "../../utils/api";
 
 const drawerWidth = 300;
 
@@ -68,9 +65,36 @@ const Dashboard = (props) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [user, setUser] = React.useState(null);
   const [channels, setChannels] = React.useState([]);
-  const [leaveChannel, doleaveChannel] = React.useState(0);
   const [currentChannel, setCurrentChannel] = React.useState(null);
-  const channelNameRef = React.createRef();
+
+  const getUser = (userId) => {
+    GET(
+      "user/" + userId,
+      {},
+      (response) => {
+        setUser(response.data);
+      },
+      (err) => {
+        setTimeout(getUser, 3000);
+      }
+    );
+  };
+
+  const getChannels = () => {
+    GET(
+      "channel",
+      {
+        Authorization: "Bearer " + localStorage.getItem("CC_Token"),
+      },
+      (response) => {
+        setChannels(response.data);
+        loadCurrentChannel(response.data);
+      },
+      (err) => {
+        setTimeout(getChannels, 3000);
+      }
+    );
+  };
 
   const loadCurrentChannel = (channels) => {
     const channel = channels.filter(
@@ -79,59 +103,9 @@ const Dashboard = (props) => {
     setCurrentChannel(channel);
   };
 
-  const getUser = (userId) => {
-    axios
-      .get("http://localhost:8000/user/" + userId)
-      .then((response) => {
-        setUser(response.data);
-      })
-      .catch((err) => {
-        setTimeout(getUser, 3000);
-      });
-  };
-
-  const getChannels = () => {
-    axios
-      .get("http://localhost:8000/channel", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("CC_Token"),
-        },
-      })
-      .then((response) => {
-        setChannels(response.data);
-        loadCurrentChannel(response.data);
-      })
-      .catch((err) => {
-        setTimeout(getChannels, 3000);
-      });
-  };
-
-  const createChannel = () => {
-    const channelName = channelNameRef.current.value;
-
-    axios
-      .post(
-        "http://localhost:8000/channel",
-        { name: channelName },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("CC_Token"),
-          },
-        }
-      )
-      .then((response) => {
-        makeToast("success", response.data.message);
-        window.location.reload();
-      })
-      .catch((err) => {
-        if (
-          err &&
-          err.response &&
-          err.response.data &&
-          err.response.data.message
-        )
-          makeToast("error", err.response.data.message);
-      });
+  const logout = () => {
+    localStorage.removeItem("CC_Token");
+    props.history.push("/");
   };
 
   React.useEffect(() => {
@@ -141,19 +115,13 @@ const Dashboard = (props) => {
       getUser(payload.id);
     }
     getChannels();
-    // eslint-disable-next-line
+    //eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
     loadCurrentChannel(channels);
-    // eslint-disable-next-line
+    //eslint-disable-next-line
   }, [props.match.params.id]);
-
-  const logout = () => {
-    doleaveChannel(leaveChannel + 1);
-    localStorage.removeItem("CC_Token");
-    props.history.push("/");
-  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -242,11 +210,10 @@ const Dashboard = (props) => {
             exact
             path='/channel/:id'
             render={() => (
-              <Conversation
+              <Channel
                 socket={props.socket}
                 user={user}
                 channel={currentChannel}
-                leaveChannel={leaveChannel}
               />
             )}
           />

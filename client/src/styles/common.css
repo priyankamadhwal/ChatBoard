@@ -36,87 +36,540 @@ body {
   border-radius: 50px;
 }
 
-/* .card {
+/* Authentication */
+
+.authOuterContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  align-items: center;
+  background-color: #1a1a1d;
+}
+
+.authInnerContainer {
+  height: fit-content;
+  width: fit-content;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 4px;
-  padding: 1rem;
-  position: relative;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 25vw;
-  transform: translate(-50%, -50%);
+  background-color: #ffffff;
 }
 
-.cardHeader {
-  background: #f7c52a;
-  padding: 0.75rem 1.5rem;
-  border-radius: 2px;
-  text-transform: uppercase;
-  transform: skewY(-4deg);
-  font-size: 1.1rem;
-  font-weight: bold;
-  display: inline-block;
+div[class^="makeStyles-root-"] {
+  width: 30vw !important;
+  height: 60vh !important;
+}
+
+div[class^="makeStyles-paper-"] {
+  margin-top: 10%;
+  justify-content: center;
+}
+
+div[class^="MuiBox-root MuiBox-root-"] {
+  padding: 6px;
+}
+
+button[class^="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-submit-"] {
+  padding: 10px !important;
+}
+
+.MuiButton-label {
+  color: white;
+}
+
+span.material-icons.MuiIcon-root.authChatIcon {
+  color: #fafbfc;
+  font-size: 1em;
+}
+
+.authHeading {
+  color: #fafbfc;
+  font-size: 3em;
+  font-weight: normal;
+}
+
+/* Dashboard */
+
+main.mainContent {
   position: absolute;
-  top: -1rem;
-  left: -0.75rem;
+  top: -25px;
+  height: 85vh;
+  left: 300px;
 }
 
-.cardBody {
-  margin-top: 2rem;
+.dashboardContainer {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-between;
 }
 
-.inputGroup {
-  margin-bottom: 1rem;
+p.headerName {
+  color: #fafbfc;
+  margin: 0;
 }
 
-label {
-  font-size: 0.9rem;
+span.material-icons.MuiIcon-root.headerIcon {
+  color: #fafbfc;
 }
 
-input {
-  border: none;
-  padding: 0.5rem 0.1rem;
-  width: 100%;
-  border-radius: 2px;
-  border-bottom: 1px solid #eee;
-  transition: all 0.5s;
+div.MuiButtonBase-root.MuiListItem-root.channel.MuiListItem-gutters.MuiListItem-button
+  div {
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #fafbfc;
+  text-decoration: none;
 }
 
-input:focus {
-  border-bottom: 1px solid #ccc;
-}
-
-button {
-  background: #1cb5e0;
-  border: 1px solid #1cb5e0;
-  color: #333;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  width: 100%;
-  text-transform: uppercase;
-}
-
-.channels {
-  margin-top: 1rem;
-}
-
-.channel {
+div.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
 }
 
-.join {
-  background: #1cb5e0;
-  padding: 0.25rem 1rem;
-  border-radius: 2px;
+div.MuiDrawer-root.MuiDrawer-modal {
+  z-index: -1 !important;
 }
 
 a {
   text-decoration: none;
-  color: #333;
-} */
+}
+
+p.dashboardUsername {
+  color: #f50057;
+  font-size: 0.6em;
+  margin: 0;
+}
+
+.channelsOuterContainer {
+  width: 25vw;
+  height: 100vh;
+  padding: 2%;
+  background-color: #1a1a1d;
+}
+
+.channelsHeading {
+  color: #e6e6ff;
+  font-size: 1.3em;
+  padding-bottom: 20px;
+  font-weight: normal;
+  width: 100%;
+  text-align: center;
+}
+
+div.joinButton {
+  background-color: #f64f59;
+  padding: 0.25rem 1rem;
+  border-radius: 2px;
+}
+
+/* Channel */
+.conversationContainer {
+  width: 50vw;
+  height: 100vh;
+  padding: 2%;
+}
+
+.channelPage {
+  display: flex;
+  width: 50vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.channelSection {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.channelContent {
+}
+
+.channelActions {
+  position: relative;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 72px;
+  grid-gap: 1rem;
+}
+
+.channelActions button {
+  height: 100%;
+}
+
+.message {
+  margin-bottom: 0.25rem;
+}
+
+.otherMessage {
+  color: #0099cc;
+  font-weight: bold;
+}
+
+.ownMessage {
+  color: #00cc00;
+  font-weight: bold;
+}
+
+.outerContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 78vw;
+  height: 103%;
+}
+
+.innerContainer {
+  position: relative;
+  width: 73%;
+  height: 100%;
+}
+
+.input .messageInput {
+  width: 98.5%;
+}
+
+.sendMessageForm {
+  display: flex;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.input {
+  width: 100%;
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+}
+
+.emoji-picker {
+  position: absolute;
+  right: 10px;
+  z-index: 2;
+  bottom: 10vh;
+  background-color: white;
+}
+
+.sendButton {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979ff;
+  padding: 20px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+}
+
+.rightContent {
+  width: 27%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(26, 26, 29, 0.1);
+}
+
+/* Messages */
+.messages {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 88%;
+  z-index: 1;
+}
+
+.messageBox {
+  background: #f3f3f3;
+  border-radius: 20px;
+  padding: 5px 20px;
+  color: white;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.messageText {
+  width: 100%;
+  letter-spacing: 0;
+  float: left;
+  font-size: 1.1em;
+  word-wrap: break-word;
+}
+
+.messageText img {
+  vertical-align: middle;
+}
+
+.messageContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5%;
+  margin-top: 3px;
+}
+
+.sentText {
+  display: flex;
+  align-items: center;
+  font-family: Helvetica;
+  color: #828282;
+  letter-spacing: 0.3px;
+}
+
+.pl-10 {
+  padding-left: 10px;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyCenter {
+  justify-content: center;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.colorWhite {
+  color: white;
+}
+
+.colorDark {
+  color: #353535;
+}
+
+.colorAdmin {
+  color: #f50057;
+  font-size: 0.9em;
+}
+
+.backgroundBlue {
+  background: #2196f3;
+}
+
+.backgroundLight {
+  background: #ededed;
+}
+
+.backgroundWhite {
+  background: rgb(250, 250, 250);
+}
+
+/* ChannelsList */
+span.channelsHeading {
+  color: #e6e6ff;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  font-size: 1.5em;
+  width: 100%;
+}
+
+div.channelsListOuterContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 83.5vh;
+}
+
+/* Welcome */
+
+.welcomeOuterContainer {
+  position: absolute;
+  top: 0;
+  width: 78vw;
+  height: 89.5vh;
+  margin-top: 14vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #cccccc;
+}
+
+.welcomeOuterContainer h1 {
+  margin: 0;
+}
+
+.intro {
+  width: 40%;
+  text-align: center;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+p.summaryHeading {
+  font-size: 2em;
+  color: #2196f3;
+  margin: 10px;
+}
+
+p.summaryTotalMessages {
+  font-size: 1.3em;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+div.summarySentimentsSection {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+div.summarySentiment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+div.summarySentiment .sentimentIcon {
+  font-size: 3em;
+  color: #1a1a1d;
+}
+
+div.summarySentiment .sentimentDesc {
+  font-size: 0.8em;
+  color: #1a1a1d;
+  line-height: 2em;
+}
+
+div.summarySentiment .sentimentPerc {
+  font-size: 1.5em;
+  color: #1a1a1d;
+  font-weight: 900;
+}
+
+span.summaryOverallSentiment {
+  color: #f30889;
+  font-weight: 900;
+  font-size: 1.2em;
+}
+
+/* NewChannel */
+form.createNewChannelInput {
+  width: 100%;
+  text-align: center;
+}
+
+.createNewChannelTextField {
+  width: 90%;
+}
+
+.createNewChannelTextField
+  .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
+  background-color: rgba(255, 255, 255, 0.192);
+  width: 100%;
+}
+
+div.createNewChannelForm {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+span.createNewChannelHeading {
+  color: rgba(255, 255, 255, 0.568);
+}
+
+/* UsersList */
+.usersListOuterContainer {
+  width: 100%;
+  height: 35%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(26, 26, 29, 0.1);
+}
+
+.usersListInnerContainer {
+  width: 70%;
+  height: 100%;
+  padding: 6%;
+  overflow-y: scroll;
+  background-color: #f3f3f3;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.usersListHeading {
+  color: rgba(48, 46, 46, 0.925);
+  font-style: italic;
+  font-size: 0.9em;
+  margin: 4% 0;
+}
+
+span.material-icons.MuiIcon-root.fas.fa-circle {
+  font-size: 0.65em;
+  margin-right: 10px;
+  color: green;
+}
+
+material-icons .usersListOnlineUserInfo {
+  font-size: 0.2;
+}
+
+/* SemanticAnalysis */
+.sentimentAnalysisOuterContainer {
+  margin-top: 5%;
+  height: 60%;
+  width: 90%;
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a1a1d;
+}
+
+.sentimentAnalysisInnerContainer {
+}
+
+.sentimentAnalysisHeading {
+  padding: 3%;
+  font-style: italic;
+  font-weight: bold;
+  color: white;
+}
+
+.sentimentAnalysisData {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.channelSentimentTotalMessages {
+  color: #2196f3;
+  font-size: 1.2em;
+}
+
+.channelOverallSentiment div,
+.channelOverallSentiment span {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.swal2-container {
+  z-index: 2000;
+}

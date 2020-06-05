@@ -8,8 +8,8 @@ const Index = (props) => {
     } else {
       props.history.push("/dashboard");
     }
-    // eslint-disable-next-line
-  }, [0]);
+    //eslint-disable-next-line
+  }, []);
   return <div></div>;
 };
 

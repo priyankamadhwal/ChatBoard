@@ -9,13 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Icon from "@material-ui/core/Icon";
 
-import Login from "./login/Login";
-import Register from "./register/Register";
+import Login from "./Login";
+import Register from "./Register";
 import Copyright from "../../components/Copyright";
 
-import "./Authentication.css";
-
-function TabPanel(props) {
+const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -33,7 +31,7 @@ function TabPanel(props) {
       )}
     </div>
   );
-}
+};
 
 TabPanel.propTypes = {
   children: PropTypes.node,

@@ -5,8 +5,10 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import axios from "axios";
-import makeToast from "../../../components/Toaster";
+
+import makeToast from "../../components/Toaster";
+
+import { POST } from "../../utils/api";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,18 +35,17 @@ const Login = (props) => {
   const loginUser = () => {
     const username = usernameRef.current.value;
     const password = passwordRef.current.value;
-    axios
-      .post("http://localhost:8000/user/login", {
-        username,
-        password,
-      })
-      .then((response) => {
+    POST(
+      "user/login",
+      { username, password },
+      {},
+      (response) => {
         makeToast("success", response.data.message);
         localStorage.setItem("CC_Token", response.data.token);
-        props.history.push("/dashboard");
         props.setupSocket();
-      })
-      .catch((err) => {
+        props.history.push("/dashboard");
+      },
+      (err) => {
         if (
           err &&
           err.response &&
@@ -52,7 +53,8 @@ const Login = (props) => {
           err.response.data.message
         )
           makeToast("error", err.response.data.message);
-      });
+      }
+    );
   };
 
   return (

@@ -3,8 +3,6 @@ import ReactEmoji from "react-emoji";
 
 import ScrollToBottom from "react-scroll-to-bottom";
 
-import "./Messages.css";
-
 const Messages = ({ messages, userId }) => {
   return (
     <ScrollToBottom className='messages'>

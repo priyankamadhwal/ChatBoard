@@ -1,15 +1,9 @@
 import React from "react";
-import { Link, Switch, Route, withRouter } from "react-router-dom";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
-import Icon from "@material-ui/core/Icon";
 import axios from "axios";
-import makeToast from "../Toaster";
-
-import "./CreateNewChannel.css";
+import makeToast from "./Toaster";
 
 const CreateNewChannel = () => {
   const channelNameRef = React.createRef();
@@ -45,14 +39,18 @@ const CreateNewChannel = () => {
   return (
     <div className='createNewChannelForm'>
       <span className='createNewChannelHeading'>Create new channel!</span>
-      <form className='createNewChannelInput' autoComplete='off'>
+      <div className='createNewChannelInput'>
         <TextField
           className='createNewChannelTextField'
           id='outlined-basic'
           type='text'
-          name='message'
+          name='channel-topic'
           placeholder='Enter a topic'
           variant='outlined'
+          onSubmit={(event) => {
+            event.key === "Enter" && event.peventDefault();
+            alert("ok");
+          }}
           inputRef={channelNameRef}
           InputProps={{
             endAdornment: (
@@ -65,7 +63,7 @@ const CreateNewChannel = () => {
             ),
           }}
         />
-      </form>
+      </div>
     </div>
   );
 };
