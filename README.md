@@ -8,26 +8,25 @@ The primary goal of this project is to explore different full stack development 
 
 There's still a lot of room for discovering better design patterns and creating good development practices. So, I'll be improving the code and adding some new (maybe unnecessary :P) features as I learn more over time!
 
-### Built with
+### Built with (Dependencies)
     
 **Stack MERN**    
-    
-**Backend**: NodeJs, Express   
-**Frontend**: React(Hooks), React-Router, Material-UI, ChartJs   
-**Database**: MongoDB (atlas), Mongoose    
-**Authentication**: Json Web Tokens    
-**Password-Hashing**: BcryptJs   
-**Web Socket**: Socket.io   
+**Backend**: [NodeJs](https://nodejs.org/en/), [Express](https://expressjs.com/)   
+**Frontend**: [React](https://reactjs.org/)(Hooks), [React-Router](https://reacttraining.com/react-router/), [Material-UI](https://material-ui.com/), [ChartJs](https://www.npmjs.com/package/react-chartjs-2)   
+**Database**: [MongoDB](https://www.mongodb.com/cloud/atlas) (atlas), [Mongoose](https://mongoosejs.com/)    
+**Authentication**: [Json Web Tokens](https://www.npmjs.com/package/jwt-then)    
+**Password-Hashing**: [BcryptJs](https://www.npmjs.com/package/bcryptjs)   
+**Web Socket**: [Socket.io](https://socket.io/)   
     
 **Sentiment Analyzer**   
-Currently uses this sentiment module that uses AFINN-165 wordlist and Emoji Sentiment Ranking to perform sentiment analysis on the messages (Accuracy > 70%).   
+Currently uses [this](https://www.npmjs.com/package/sentiment) sentiment module that uses [AFINN-165](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html) wordlist and [Emoji Sentiment Ranking](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144296) to perform sentiment analysis on the messages (Accuracy > 70%).   
     
 ## Getting started
     
 ### Prerequisites
 
-- Nodejs   
-- Mongo
+- [NodeJs](https://nodejs.org/en/) 
+- [MongoDB](https://www.mongodb.com/cloud/atlas) (atlas) account
 
 ### Installation
 
@@ -41,7 +40,7 @@ Rename the [.env.template]('\server.env.template') file inside the server folder
 
 ### Running locally
 
-- `cd ChatBoard` to go to project folder.
+Inside project folder: ```cd ChatBoard```:
 - `npm start` to run both client and server.
 - `cd server && npm start` to run only server.
 - `cd client && npm start` to run only client.
