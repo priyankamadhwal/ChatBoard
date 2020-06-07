@@ -52,12 +52,10 @@ exports.login = async (req, res) => {
 
   if (!isMatch) throw "Password is incorrect.";
 
-  const token = await jwt.sign({ id: user.id }, process.env.SECRET, {
-    expiresIn: "1d",
-  });
+  const token = await jwt.sign({ id: user.id }, process.env.SECRET);
 
   res.json({
-    message: "User logged in successfully!",
+    message: "Logged in successfully!",
     token,
   });
 };

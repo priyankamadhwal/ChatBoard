@@ -2,30 +2,29 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
-import axios from "axios";
+
+import { POST } from "../utils/api";
 import makeToast from "./Toaster";
 
-const CreateNewChannel = () => {
+const NewChannel = ({ socket }) => {
   const channelNameRef = React.createRef();
 
   const createChannel = () => {
     const channelName = channelNameRef.current.value;
 
-    axios
-      .post(
-        "http://localhost:8000/channel",
-        { name: channelName },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("CC_Token"),
-          },
-        }
-      )
-      .then((response) => {
+    POST(
+      "channel",
+      { name: channelName },
+      {
+        Authorization: "Bearer " + localStorage.getItem("CC_Token"),
+      },
+      (response) => {
         makeToast("success", response.data.message);
-        window.location.reload();
-      })
-      .catch((err) => {
+        if (socket) {
+          socket.emit("newChannel", { channelName });
+        }
+      },
+      (err) => {
         if (
           err &&
           err.response &&
@@ -33,39 +32,34 @@ const CreateNewChannel = () => {
           err.response.data.message
         )
           makeToast("error", err.response.data.message);
-      });
+      }
+    );
+    channelNameRef.current.value = "";
   };
 
   return (
-    <div className='createNewChannelForm'>
-      <span className='createNewChannelHeading'>Create new channel!</span>
-      <div className='createNewChannelInput'>
-        <TextField
-          className='createNewChannelTextField'
-          id='outlined-basic'
-          type='text'
-          name='channel-topic'
-          placeholder='Enter a topic'
-          variant='outlined'
-          onSubmit={(event) => {
-            event.key === "Enter" && event.peventDefault();
-            alert("ok");
-          }}
-          inputRef={channelNameRef}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment>
-                <IconButton
-                  className='fas fa-plus-circle'
-                  onClick={createChannel}
-                />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </div>
+    <div className='newChannelForm'>
+      <h1 className='newChannelHeading'>Create new channel!</h1>
+      <TextField
+        className='newChannelTextField'
+        type='text'
+        name='channel-topic'
+        placeholder='Enter a topic'
+        variant='outlined'
+        inputRef={channelNameRef}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment>
+              <IconButton
+                className='fas fa-plus-circle'
+                onClick={createChannel}
+              />
+            </InputAdornment>
+          ),
+        }}
+      />
     </div>
   );
 };
 
-export default CreateNewChannel;
+export default NewChannel;

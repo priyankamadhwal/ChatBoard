@@ -1,21 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import Icon from "@material-ui/core/Icon";
 
-import { GET } from "../utils/api";
+const ChannelSentimentAnalysis = (props) => {
+  const [sentiment, setSentiment] = useState(props.sentiment);
 
-const SentimentAnalysis = (props) => {
-  const [sentiment, setSentiment] = React.useState(props.sentiment);
-
-  React.useEffect(() => {
+  useEffect(() => {
     setSentiment(props.sentiment);
   }, [props.sentiment]);
 
   return (
-    <div className='sentimentAnalysisOuterContainer'>
+    <div className='channelSentimentContainer'>
       {sentiment ? (
-        <div className='sentimentAnalysisData'>
-          <span className='sentimentAnalysisHeading'>
+        <div className='channelSentimentData'>
+          <span className='channelSentimentHeading'>
             Sentiment Distribution
           </span>
           <div className='channelSentimentTotalMessages'>
@@ -38,19 +36,23 @@ const SentimentAnalysis = (props) => {
             height={200}
           />
           <div className='channelOverallSentiment'>
-            {sentiment.positive > sentiment.neutral &&
-            sentiment.positive > sentiment.negative ? (
-              <div>
-                <div>POSITIVE</div> <Icon className='fas fa-grin' />
-              </div>
-            ) : sentiment.neutral > sentiment.negative ? (
-              <div>
-                <div>NEUTRAL</div> <Icon className='fas fa-meh' />
-              </div>
+            {sentiment.totalMessages > 0 ? (
+              sentiment.positive > sentiment.neutral &&
+              sentiment.positive > sentiment.negative ? (
+                <div>
+                  <div>POSITIVE</div> <Icon className='fas fa-grin' />
+                </div>
+              ) : sentiment.neutral > sentiment.negative ? (
+                <div>
+                  <div>NEUTRAL</div> <Icon className='fas fa-meh' />
+                </div>
+              ) : (
+                <div>
+                  <div>NEGATIVE</div> <Icon className='fas fa-frown-open' />
+                </div>
+              )
             ) : (
-              <div>
-                <div>NEGATIVE</div> <Icon className='fas fa-frown-open' />
-              </div>
+              <div>NO RECORDS!</div>
             )}
           </div>
         </div>
@@ -61,4 +63,4 @@ const SentimentAnalysis = (props) => {
   );
 };
 
-export default SentimentAnalysis;
+export default ChannelSentimentAnalysis;

@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import makeToast from "../../components/Toaster";
-
 import { POST } from "../../utils/api";
 
 const useStyles = makeStyles((theme) => ({

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -9,19 +9,16 @@ import Picker from "emoji-picker-react";
 import Messages from "../../components/Messages";
 import UsersList from "../../components/UsersList";
 import ChannelSentimentAnalysis from "../../components/ChannelSentimentAnalysis";
-
 import { GET } from "../../utils/api";
 
-const Conversation = (props) => {
+const Channel = (props) => {
   const socket = props.socket;
-  const [userId, setUserId] = React.useState("");
-  const [message, setMessage] = React.useState("");
-  const [messages, setMessages] = React.useState([]);
-  const [onlineUsers, setOnlineUsers] = React.useState([]);
-  const [channelSentiment, setChannelSentiment] = React.useState(null);
-  const [isEmojiPickerVisibile, setIsEmojiPickerVisibile] = React.useState(
-    false
-  );
+  const [userId, setUserId] = useState("");
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [channelSentiment, setChannelSentiment] = useState(null);
+  const [isEmojiPickerVisibile, setIsEmojiPickerVisibile] = useState(false);
 
   const getOldMessages = () => {
     GET(
@@ -69,16 +66,27 @@ const Conversation = (props) => {
     );
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("CC_Token");
     if (token) {
       const payload = JSON.parse(atob(token.split(".")[1]));
       setUserId(payload.id);
     }
+    if (socket) {
+      socket.on("newMessage", (message) => {
+        setMessages((prevMessages) => [...prevMessages, message]);
+      });
+      socket.on("updateSentiment", (sentiment) => {
+        setChannelSentiment(sentiment);
+      });
+      socket.on("onlineUsers", (users) => {
+        setOnlineUsers(users);
+      });
+    }
     //eslint-disable-next-line
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getOldMessages();
     getChannelSentiment();
 
@@ -102,48 +110,19 @@ const Conversation = (props) => {
     //eslint-disable-next-line
   }, [props.match.params.id]);
 
-  React.useEffect(() => {
-    if (socket) {
-      socket.on("newMessage", (message) => {
-        const newMessages = [...messages, message];
-        setMessages(newMessages);
-      });
-    }
-    //eslint-disable-next-line
-  }, [messages]);
-
-  React.useEffect(() => {
-    if (socket) {
-      socket.on("onlineUsers", (users) => {
-        setOnlineUsers(users);
-      });
-    }
-    //eslint-disable-next-line
-  }, [onlineUsers]);
-
-  React.useEffect(() => {
-    if (socket) {
-      socket.on("updateSentiment", (sentiment) => {
-        setChannelSentiment(sentiment);
-      });
-    }
-    //eslint-disable-next-line
-  }, [props.channel]);
-
   return (
-    <div className='outerContainer'>
-      <div className='innerContainer'>
-        <div className='emoji-picker'>
+    <div className='channelOuterContainer'>
+      <div className='channelInnerContainer'>
+        <div className='channelEmojiPicker'>
           {isEmojiPickerVisibile ? (
             <Picker onEmojiClick={onEmojiClick} />
           ) : null}
         </div>
         <Messages messages={messages} userId={userId} />
-        <div className='sendMessageForm'>
-          <form className='input' autoComplete='off'>
+        <div className='channelSendMessage'>
+          <form className='channelInputForm' autoComplete='off'>
             <TextField
-              className='messageInput'
-              id='outlined-basic'
+              className='channelInputTextField'
               type='text'
               name='message'
               placeholder='Type a message...'
@@ -175,7 +154,7 @@ const Conversation = (props) => {
           </form>
         </div>
       </div>
-      <div className='rightContent'>
+      <div className='channelRightContent'>
         <UsersList onlineUsers={onlineUsers} />
         <ChannelSentimentAnalysis sentiment={channelSentiment} />
       </div>
@@ -183,4 +162,4 @@ const Conversation = (props) => {
   );
 };
 
-export default withRouter(Conversation);
+export default withRouter(Channel);

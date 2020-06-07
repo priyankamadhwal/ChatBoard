@@ -12,6 +12,7 @@ exports.getAllMessagesInRoom = async (req, res) => {
     messages.map((currMessage) => {
       return {
         message: currMessage.message,
+        sentimentScore: currMessage.sentimentScore,
         username: currMessage.user.username,
         userId: currMessage.user._id,
       };

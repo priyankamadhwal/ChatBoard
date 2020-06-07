@@ -81,6 +81,12 @@ sockets.init = (server) => {
       });
     });
 
+    // When user creates a new channel
+    socket.on("newChannel", async ({ channelName }) => {
+      const channel = await Channel.findOne({ name: channelName });
+      if (channel) io.emit("newChannel", { channel });
+    });
+
     // When user sends a new message
     socket.on("newMessage", async ({ username, channelId, message }) => {
       // Blank messages are ignored
@@ -91,7 +97,7 @@ sockets.init = (server) => {
           message,
           username: username,
           userId: socket.userId,
-          sentiment: sentimentResult.score,
+          sentimentScore: sentimentResult.score,
         });
 
         const channel = await Channel.findOne({ _id: channelId });
@@ -120,11 +126,11 @@ sockets.init = (server) => {
         const newMessage = new Message({
           channel: channelId,
           user: socket.userId,
-          sentiment: sentimentResult.score,
+          sentimentScore: sentimentResult.score,
           message,
         });
 
-        //await newMessage.save();
+        await newMessage.save();
       }
     });
   });

@@ -16,7 +16,7 @@ const Welcome = (props) => {
       neutralPercentage = 0,
       negativePercentage = 0,
       overallSentiment = "";
-    if (user) {
+    if (user && user.totalMessages > 0) {
       totalMessages = user.totalMessages;
       positivePercentage = ((user.positive / user.totalMessages) * 100).toFixed(
         2
@@ -89,7 +89,9 @@ const Welcome = (props) => {
                   ? 0.16
                   : summary.overallSentiment === "NEUTRAL"
                   ? 0.5
-                  : 0.83
+                  : summary.overallSentiment === "NEGATIVE"
+                  ? 0.83
+                  : 0
               }
               arcPadding={0.02}
               colors={["#5BE12C", "#F5CD19", "#EA4228"]}

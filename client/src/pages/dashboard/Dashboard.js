@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -10,12 +10,12 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
-import { Switch, Route, withRouter } from "react-router-dom";
+import { Link, Switch, Route, withRouter } from "react-router-dom";
 
 import Channel from "./Channel";
 import ChannelsList from "../../components/ChannelsList";
 import Welcome from "./Welcome";
-
+import makeToast from "../../components/Toaster";
 import { GET } from "../../utils/api";
 
 const drawerWidth = 300;
@@ -62,10 +62,10 @@ const Dashboard = (props) => {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [user, setUser] = React.useState(null);
-  const [channels, setChannels] = React.useState([]);
-  const [currentChannel, setCurrentChannel] = React.useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [channels, setChannels] = useState([]);
+  const [currentChannel, setCurrentChannel] = useState(null);
 
   const getUser = (userId) => {
     GET(
@@ -106,19 +106,29 @@ const Dashboard = (props) => {
   const logout = () => {
     localStorage.removeItem("CC_Token");
     props.history.push("/");
+    makeToast("success", "Logged out successfully!");
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("CC_Token");
     if (token) {
       const payload = JSON.parse(atob(token.split(".")[1]));
       getUser(payload.id);
     }
+
     getChannels();
+
+    if (props.socket) {
+      props.socket.on("newChannel", ({ channel }) => {
+        setChannels((prevChannels) => [...prevChannels, channel]);
+      });
+    }
+
+    return () => {};
     //eslint-disable-next-line
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     loadCurrentChannel(channels);
     //eslint-disable-next-line
   }, [props.match.params.id]);
@@ -130,15 +140,18 @@ const Dashboard = (props) => {
   const drawer = (
     <div>
       <div className={classes.toolbar}>
-        <p className='headerName'>
-          ChatBoard <Icon className='headerIcon'>mark_chat_read</Icon>
-        </p>
+        <Link to='/dashboard'>
+          <p className='dashboardHeaderName'>
+            ChatBoard{" "}
+            <Icon className='dashboardHeaderIcon'>mark_chat_read</Icon>
+          </p>
+        </Link>
         <p className='dashboardUsername'>
           {user ? "Hey " + user.username + "!" : ""}
         </p>
       </div>
       <Divider />
-      <ChannelsList channels={channels} />
+      <ChannelsList channels={channels} socket={props.socket} />
     </div>
   );
 
@@ -198,7 +211,7 @@ const Dashboard = (props) => {
           </Drawer>
         </Hidden>
       </nav>
-      <main className='mainContent'>
+      <main className='dashboardMainContent'>
         <div className={classes.toolbar} />
         <Switch>
           <Route

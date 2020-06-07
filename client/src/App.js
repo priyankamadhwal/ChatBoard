@@ -1,14 +1,13 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import io from "socket.io-client";
 
+import Index from "./pages/Index";
 import Authentication from "./pages/authentication/Authentication";
 import Dashboard from "./pages/dashboard/Dashboard";
-import Index from "./pages/Index";
+import NotFound from "./pages/404";
 
-import makeToast from "./components/Toaster";
-
-function App() {
+const App = () => {
   const [socket, setSocket] = React.useState(null);
 
   const setupSocket = () => {
@@ -39,6 +38,24 @@ function App() {
     //eslint-disable-next-line
   }, []);
 
+  const ProtectedRoute = ({ component: Component, ...rest }) => {
+    const token = localStorage.getItem("CC_Token");
+    return (
+      <Route
+        {...rest}
+        render={(props) =>
+          token ? (
+            <Component socket={socket} />
+          ) : (
+            <Redirect
+              to={{ pathname: "/auth", state: { from: props.location } }}
+            />
+          )
+        }
+      />
+    );
+  };
+
   return (
     <BrowserRouter>
       <Switch>
@@ -48,14 +65,15 @@ function App() {
           path='/auth'
           render={() => <Authentication setupSocket={setupSocket} />}
         />
-        <Route
+        <ProtectedRoute
           exact
           path={["/dashboard", "/channel/:id"]}
-          render={() => <Dashboard socket={socket} />}
+          component={Dashboard}
         />
+        <Route path='' component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

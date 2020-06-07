@@ -36,6 +36,14 @@ body {
   border-radius: 50px;
 }
 
+.swal2-container {
+  z-index: 2000;
+}
+
+a {
+  text-decoration: none;
+}
+
 /* Authentication */
 
 .authOuterContainer {
@@ -54,6 +62,17 @@ body {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 4px;
   background-color: #ffffff;
+}
+
+.authHeading {
+  color: #fafbfc;
+  font-size: 3em;
+  font-weight: normal;
+}
+
+span.material-icons.MuiIcon-root.authChatIcon {
+  color: #fafbfc;
+  font-size: 1em;
 }
 
 div[class^="makeStyles-root-"] {
@@ -78,61 +97,33 @@ button[class^="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-
   color: white;
 }
 
-span.material-icons.MuiIcon-root.authChatIcon {
-  color: #fafbfc;
-  font-size: 1em;
+@media only screen and (max-width: 1000px) {
+  div[class^="makeStyles-root-"] {
+    width: 40vw !important;
+  }
 }
 
-.authHeading {
-  color: #fafbfc;
-  font-size: 3em;
-  font-weight: normal;
+@media only screen and (max-width: 770px) {
+  div[class^="makeStyles-root-"] {
+    width: 60vw !important;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  div[class^="makeStyles-root-"] {
+    width: 80vw !important;
+  }
 }
 
 /* Dashboard */
 
-main.mainContent {
-  position: absolute;
-  top: -25px;
-  height: 85vh;
-  left: 300px;
-}
-
-.dashboardContainer {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  justify-content: space-between;
-}
-
-p.headerName {
+p.dashboardHeaderName {
   color: #fafbfc;
   margin: 0;
 }
 
-span.material-icons.MuiIcon-root.headerIcon {
+span.material-icons.MuiIcon-root.dashboardHeaderIcon {
   color: #fafbfc;
-}
-
-div.MuiButtonBase-root.MuiListItem-root.channel.MuiListItem-gutters.MuiListItem-button
-  div {
-  padding-left: 30px;
-  padding-right: 30px;
-  color: #fafbfc;
-  text-decoration: none;
-}
-
-div.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
-  display: flex;
-  justify-content: space-between;
-}
-
-div.MuiDrawer-root.MuiDrawer-modal {
-  z-index: -1 !important;
-}
-
-a {
-  text-decoration: none;
 }
 
 p.dashboardUsername {
@@ -141,111 +132,41 @@ p.dashboardUsername {
   margin: 0;
 }
 
-.channelsOuterContainer {
-  width: 25vw;
-  height: 100vh;
-  padding: 2%;
-  background-color: #1a1a1d;
+main.dashboardMainContent {
+  position: absolute;
+  top: -25px;
+  height: 85vh;
+  left: 300px;
 }
 
-.channelsHeading {
-  color: #e6e6ff;
-  font-size: 1.3em;
-  padding-bottom: 20px;
-  font-weight: normal;
-  width: 100%;
-  text-align: center;
+div.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters {
+  display: flex;
+  justify-content: space-between;
 }
 
-div.joinButton {
-  background-color: #f64f59;
-  padding: 0.25rem 1rem;
-  border-radius: 2px;
+@media only screen and (max-width: 600px) {
+  main.dashboardMainContent {
+    top: -35px;
+    left: 0;
+  }
 }
 
 /* Channel */
-.conversationContainer {
-  width: 50vw;
-  height: 100vh;
-  padding: 2%;
-}
 
-.channelPage {
-  display: flex;
-  width: 50vw;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  height: 75vh;
-}
-
-.channelSection {
-  width: 100%;
-  height: 100%;
-  margin: auto;
-}
-
-.channelContent {
-}
-
-.channelActions {
-  position: relative;
-  bottom: 0;
-  display: grid;
-  grid-template-columns: 1fr 72px;
-  grid-gap: 1rem;
-}
-
-.channelActions button {
-  height: 100%;
-}
-
-.message {
-  margin-bottom: 0.25rem;
-}
-
-.otherMessage {
-  color: #0099cc;
-  font-weight: bold;
-}
-
-.ownMessage {
-  color: #00cc00;
-  font-weight: bold;
-}
-
-.outerContainer {
+.channelOuterContainer {
   display: flex;
   justify-content: space-between;
   width: 78vw;
   height: 103%;
 }
 
-.innerContainer {
+.channelInnerContainer {
   position: relative;
   width: 73%;
   height: 100%;
 }
 
-.input .messageInput {
-  width: 98.5%;
-}
-
-.sendMessageForm {
-  display: flex;
-  width: 100%;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-.input {
-  width: 100%;
-  z-index: 3;
-  position: absolute;
-  bottom: 0;
-}
-
-.emoji-picker {
+.channelEmojiPicker {
   position: absolute;
   right: 10px;
   z-index: 2;
@@ -253,18 +174,25 @@ div.joinButton {
   background-color: white;
 }
 
-.sendButton {
-  color: #fff !important;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #2979ff;
-  padding: 20px;
-  display: inline-block;
-  border: none;
-  width: 20%;
+.channelSendMessage {
+  display: flex;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
-.rightContent {
+.channelInputForm {
+  width: 100%;
+  z-index: 3;
+  position: absolute;
+  bottom: 0;
+}
+
+.channelInputForm .channelInputTextField {
+  width: 98.5%;
+}
+
+.channelRightContent {
   width: 27%;
   height: 100%;
   display: flex;
@@ -273,7 +201,22 @@ div.joinButton {
   background-color: rgba(26, 26, 29, 0.1);
 }
 
+@media only screen and (max-width: 600px) {
+  .channelRightContent {
+    display: none;
+  }
+  .channelOuterContainer {
+    width: 98.7vw;
+    height: 105%;
+    align-self: center;
+  }
+  .channelInnerContainer {
+    width: 100%;
+  }
+}
+
 /* Messages */
+
 .messages {
   position: absolute;
   top: 0;
@@ -281,34 +224,6 @@ div.joinButton {
   width: 100%;
   height: 88%;
   z-index: 1;
-}
-
-.messageBox {
-  background: #f3f3f3;
-  border-radius: 20px;
-  padding: 5px 20px;
-  color: white;
-  display: inline-block;
-  max-width: 80%;
-}
-
-.messageText {
-  width: 100%;
-  letter-spacing: 0;
-  float: left;
-  font-size: 1.1em;
-  word-wrap: break-word;
-}
-
-.messageText img {
-  vertical-align: middle;
-}
-
-.messageContainer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 5%;
-  margin-top: 3px;
 }
 
 .sentText {
@@ -319,12 +234,59 @@ div.joinButton {
   letter-spacing: 0.3px;
 }
 
+.messageBox {
+  background: #f3f3f3;
+  border-radius: 20px;
+  padding: 0px 20px;
+  color: white;
+  display: inline-block;
+  max-width: 80%;
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.messageText {
+  width: 100%;
+  letter-spacing: 0;
+  float: left;
+  margin: 0;
+  font-size: 1.1em;
+  word-wrap: break-word;
+}
+
 .pl-10 {
   padding-left: 10px;
 }
 
 .pr-10 {
   padding-right: 10px;
+}
+
+.backgroundWhite {
+  background: rgb(250, 250, 250);
+}
+.messageText img {
+  vertical-align: middle;
+}
+
+.messageContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5%;
+  margin-top: 6px;
+}
+
+.backgroundGreen {
+  background: rgba(91, 225, 44, 0.5);
+}
+
+.backgroundYellow {
+  background: rgba(245, 205, 25, 0.5);
+}
+
+.backgroundRed {
+  background: rgba(234, 66, 40, 0.5);
 }
 
 .justifyStart {
@@ -339,38 +301,25 @@ div.joinButton {
   justify-content: flex-end;
 }
 
-.colorWhite {
-  color: white;
-}
-
-.colorDark {
-  color: #353535;
-}
-
 .colorAdmin {
   color: #f50057;
   font-size: 0.9em;
 }
 
-.backgroundBlue {
-  background: #2196f3;
-}
-
-.backgroundLight {
-  background: #ededed;
-}
-
-.backgroundWhite {
-  background: rgb(250, 250, 250);
+.colorUser {
+  color: #353535;
 }
 
 /* ChannelsList */
-span.channelsHeading {
+
+h1.channelsListHeading {
   color: #e6e6ff;
   display: flex;
   justify-content: center;
   padding-top: 15px;
+  padding-bottom: 0;
   font-size: 1.5em;
+  margin-bottom: 10px;
   width: 100%;
 }
 
@@ -379,6 +328,14 @@ div.channelsListOuterContainer {
   flex-direction: column;
   justify-content: space-between;
   height: 83.5vh;
+}
+
+div.MuiButtonBase-root.MuiListItem-root.channel.MuiListItem-gutters.MuiListItem-button
+  div {
+  padding-left: 30px;
+  padding-right: 30px;
+  color: #fafbfc;
+  text-decoration: none;
 }
 
 /* Welcome */
@@ -410,6 +367,7 @@ div.channelsListOuterContainer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 p.summaryHeading {
@@ -461,32 +419,50 @@ span.summaryOverallSentiment {
   font-size: 1.2em;
 }
 
-/* NewChannel */
-form.createNewChannelInput {
-  width: 100%;
-  text-align: center;
+@media only screen and (max-width: 600px) {
+  .welcomeOuterContainer {
+    width: 100vw;
+    height: 91vh;
+  }
+
+  .intro {
+    width: 80%;
+    text-align: center;
+  }
+
+  p.summaryHeading {
+    font-size: 1.8em;
+    color: #2196f3;
+  }
 }
 
-.createNewChannelTextField {
+/* NewChannel */
+
+div.newChannelForm {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+h1.newChannelHeading {
+  color: rgba(255, 255, 255, 0.568);
+  font-size: 1em;
+  font-weight: 500;
+  padding: 0px;
+  margin-bottom: 5px;
+}
+
+.newChannelTextField {
   width: 90%;
 }
 
-.createNewChannelTextField
+.newChannelTextField
   .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
   background-color: rgba(255, 255, 255, 0.192);
   width: 100%;
 }
 
-div.createNewChannelForm {
-  text-align: center;
-  font-size: 1.1em;
-}
-
-span.createNewChannelHeading {
-  color: rgba(255, 255, 255, 0.568);
-}
-
 /* UsersList */
+
 .usersListOuterContainer {
   width: 100%;
   height: 35%;
@@ -524,8 +500,9 @@ material-icons .usersListOnlineUserInfo {
   font-size: 0.2;
 }
 
-/* SemanticAnalysis */
-.sentimentAnalysisOuterContainer {
+/* ChannelSemanticAnalysis */
+
+.channelSentimentContainer {
   margin-top: 5%;
   height: 60%;
   width: 90%;
@@ -536,17 +513,14 @@ material-icons .usersListOnlineUserInfo {
   background-color: #1a1a1d;
 }
 
-.sentimentAnalysisInnerContainer {
-}
-
-.sentimentAnalysisHeading {
+.channelSentimentHeading {
   padding: 3%;
   font-style: italic;
   font-weight: bold;
   color: white;
 }
 
-.sentimentAnalysisData {
+.channelSentimentData {
   width: 100%;
   height: 100%;
   padding: 10px;
@@ -570,6 +544,22 @@ material-icons .usersListOnlineUserInfo {
   justify-content: center;
 }
 
-.swal2-container {
-  z-index: 2000;
+/* 404 */
+
+.notFoundContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: #1a1a1d;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFoundHeading {
+  font-size: 4em;
+  color: #2196f3;
+  padding: 0;
+  margin: 3px;
 }
