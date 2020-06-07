@@ -1,6 +1,6 @@
 # ChatBoard
 
-A real-time chat application built with Socket.io and the MERN (MongoDB, Express, React, NodeJs) stack that performs sentiment analysis on every incoming message to classify as positive, neutral or negative, the opinion or tone of what people are saying or feeling about different trending topics.
+A real-time chat application built with Socket.io and the MERN (MongoDB, Express, React, NodeJs) stack that performs sentiment analysis on every incoming message to classify as positive, negative or neutral, the opinion or tone of what people are saying or feeling about different trending topics.
 
 ### Objective
 
