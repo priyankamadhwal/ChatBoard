@@ -47,6 +47,6 @@ Inside project folder: ```cd ChatBoard```:
 
 ## Screenshots
 
-<img src="https://i.postimg.cc/sfZSMdhW/1.jpg" alt="authentication" width="1000"/>
-<img src="https://i.postimg.cc/dQ83MqC5/2.jpg" alt="dashboard" width="1000"/>
-<img src="https://i.postimg.cc/GhmCMrx8/3.jpg" alt="channel" width="1000"/>
+<img src="https://i.postimg.cc/sfZSMdhW/1.jpg" alt="authentication" width="700"/>
+<img src="https://i.postimg.cc/dQ83MqC5/2.jpg" alt="dashboard" width="700"/>
+<img src="https://i.postimg.cc/GhmCMrx8/3.jpg" alt="channel" width="700"/>
