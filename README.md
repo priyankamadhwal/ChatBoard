@@ -42,7 +42,7 @@ Rename the [.env.template](/server/.env.template) file inside the server folder 
 
 ### Running locally
 
-Inside project folder: ```cd ChatBoard```:
+Inside project folder ```cd ChatBoard```:
 - `npm start` to run both client and server.
 - `cd server && npm start` to run only server.
 - `cd client && npm start` to run only client.
