@@ -47,4 +47,6 @@ Inside project folder: ```cd ChatBoard```:
 
 ## Screenshots
 
-<img src="https://i.postimg.cc/sfZSMdhW/1.jpg" alt="dashboard"/>
+<img src="https://i.postimg.cc/sfZSMdhW/1.jpg" alt="authentication"/>
+<img src="https://i.postimg.cc/dQ83MqC5/2.jpg" alt="dashboard"/>
+<img src="https://i.postimg.cc/GhmCMrx8/3.jpg" alt="channel"/>
