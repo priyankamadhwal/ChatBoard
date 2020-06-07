@@ -11,7 +11,7 @@ There's still a lot of room for discovering better design patterns and creating 
 ### Built with
     
 **Stack MERN**    
-**Frontend**: [React](https://reactjs.org/) (Hooks), [React-Router](https://reacttraining.com/react-router/), [Material-UI](https://material-ui.com/), [ChartJs](https://www.npmjs.com/package/react-chartjs-2)
+**Frontend**: [React](https://reactjs.org/) (Hooks), [React-Router](https://reacttraining.com/react-router/), [Material-UI](https://material-ui.com/), [ChartJs](https://www.npmjs.com/package/react-chartjs-2)   
 **HTTP Client**: [Axios](https://github.com/axios/axios)   
 **Backend**: [NodeJs](https://nodejs.org/en/), [Express](https://expressjs.com/)   
 **Database**: [MongoDB](https://www.mongodb.com/cloud/atlas) (atlas), [Mongoose](https://mongoosejs.com/)    
