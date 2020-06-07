@@ -19,7 +19,7 @@ There's still a lot of room for discovering better design patterns and creating 
 **Web Socket**: [Socket.io](https://socket.io/)   
     
 **Sentiment Analyzer**   
-Currently uses [this](https://www.npmjs.com/package/sentiment) sentiment module that uses [AFINN-165](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html) wordlist and [Emoji Sentiment Ranking](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144296) to perform sentiment analysis on the messages (Accuracy > 70%).   
+Currently uses [this](https://www.npmjs.com/package/sentiment) module that uses [AFINN-165](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html) wordlist and [Emoji Sentiment Ranking](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144296) to perform sentiment analysis on the messages (Accuracy > 70%).
     
 ## Getting started
     
@@ -36,7 +36,7 @@ Currently uses [this](https://www.npmjs.com/package/sentiment) sentiment module 
 
 ### Configuring environment variables
 
-Rename the [.env.template]('/server/.env.template') file inside the server folder to `.env` and fill all the values.
+Rename the [.env.template](/server/.env.template) file inside the server folder to `.env` and fill all the values.
 
 ### Running locally
 
