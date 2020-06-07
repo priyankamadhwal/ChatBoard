@@ -6,7 +6,7 @@ A real-time chat application built with Socket.io and the MERN (MongoDB, Express
 
 The primary goal of this project is to explore different full stack development technologies and boost my understanding of **client/server architecture**, **authentication**, **session-management**, **react-hooks**, **web sockets**, **api calls**, **express**, **mongodb** etc.
 
-There's still a lot of room for discovering better design patterns and creating good development practices. So, I'll be improving the code and adding some new (maybe unnecessary :stuck_out_tongue:) features as I learn more over time!
+There's still a lot of room for discovering better design patterns and creating good development practices. So, I'll be improving the code and adding some new (maybe unnecessary :P) features as I learn more over time!
 
 ### Built with
 
