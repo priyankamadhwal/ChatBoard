@@ -1,6 +1,6 @@
 # ChatBoard
 
-A real-time chat application built with Socket.io and the MERN (MongoDB, Express, React, NodeJs) stack that performs sentiment analysis on every incoming message to classify as positive, negative or neutral, the opinion or tone of what people are saying or feeling about different trending topics.
+A real-time chat application built with Socket.io and the MERN (MongoDB, Express, React, NodeJs) stack that performs sentiment analysis on every incoming message to classify as positive, neutral or negative, the opinion or tone of what people are saying or feeling about different trending topics.
 
 ### Objective
 
@@ -14,7 +14,7 @@ There's still a lot of room for discovering better design patterns and creating 
 **Frontend**: [React](https://reactjs.org/) (Hooks), [React-Router](https://reacttraining.com/react-router/), [Material-UI](https://material-ui.com/), [ChartJs](https://www.npmjs.com/package/react-chartjs-2)   
 **HTTP Client**: [Axios](https://github.com/axios/axios)   
 **Backend**: [NodeJs](https://nodejs.org/en/), [Express](https://expressjs.com/)   
-**Database**: [MongoDB](https://www.mongodb.com/cloud/atlas) (atlas), [Mongoose](https://mongoosejs.com/)    
+**Database**: [MongoDB](https://www.mongodb.com/cloud/atlas) (Atlas), [Mongoose](https://mongoosejs.com/)    
 **Authentication**: [Json Web Tokens](https://www.npmjs.com/package/jwt-then)    
 **Password-Hashing**: [BcryptJs](https://www.npmjs.com/package/bcryptjs)   
 **Web Socket**: [Socket.io](https://socket.io/)   
