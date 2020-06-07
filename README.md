@@ -1,6 +1,6 @@
 # ChatBoard
 
-A real-time chat application built with Socket.io and the MERN (MongoDB, Express, React, Node.js) stack that performs sentiment analysis on every incoming message.
+A real-time chat application built with Socket.io and the MERN (MongoDB, Express, React, Node.js) stack that performs sentiment analysis on every incoming message to classify as positive, negative or neutral, the opinion or tone of what people are saying or feeling about different trending topics.
 
 ### Objective
 
@@ -19,7 +19,7 @@ There's still a lot of room for discovering better design patterns and creating 
 **Web Socket**: [Socket.io](https://socket.io/)   
     
 **Sentiment Analyzer**   
-Currently uses [this](https://www.npmjs.com/package/sentiment) module that uses [AFINN-165](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html) wordlist and [Emoji Sentiment Ranking](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144296) to perform sentiment analysis on the messages (Accuracy > 70%).
+Currently uses [this](https://www.npmjs.com/package/sentiment) module that uses [AFINN-165](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html) wordlist and [Emoji Sentiment Ranking](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144296) to perform sentiment analysis on the messages (Accuracy > 70%).    
 (Will be adding my own sentiment analysis classifier later.)
     
 ## Getting started
@@ -53,3 +53,17 @@ Inside project folder: ```cd ChatBoard```:
     <img src="https://i.postimg.cc/dQ83MqC5/2.jpg" alt="dashboard" width="700"/>
     <img src="https://i.postimg.cc/GhmCMrx8/3.jpg" alt="channel" width="700"/>
 </p>
+
+## Features
+   
+- Register/Login
+- Creating channels on the basis of different topics of interest
+- Joining different channels
+- A separate list of currently online users for each channel
+- Real time chatting
+- Sentiment analysis of every incoming message in real time
+- Assigns the background color to message box on the basis of sentiment score
+- Displays sentiment distribution for every channel
+- Displays overall sentiment level of the user 
+- Real time updation of channels, online users and sentiment distribution
+
