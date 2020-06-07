@@ -12,7 +12,7 @@ There's still a lot of room for discovering better design patterns and creating 
     
 **Stack MERN**    
 **Backend**: [NodeJs](https://nodejs.org/en/), [Express](https://expressjs.com/)   
-**Frontend**: [React](https://reactjs.org/)(Hooks), [React-Router](https://reacttraining.com/react-router/), [Material-UI](https://material-ui.com/), [ChartJs](https://www.npmjs.com/package/react-chartjs-2)   
+**Frontend**: [React](https://reactjs.org/) (Hooks), [React-Router](https://reacttraining.com/react-router/), [Material-UI](https://material-ui.com/), [ChartJs](https://www.npmjs.com/package/react-chartjs-2)   
 **Database**: [MongoDB](https://www.mongodb.com/cloud/atlas) (atlas), [Mongoose](https://mongoosejs.com/)    
 **Authentication**: [Json Web Tokens](https://www.npmjs.com/package/jwt-then)    
 **Password-Hashing**: [BcryptJs](https://www.npmjs.com/package/bcryptjs)   
@@ -36,7 +36,7 @@ Currently uses [this](https://www.npmjs.com/package/sentiment) sentiment module 
 
 ### Configuring environment variables
 
-Rename the [.env.template]('\server.env.template') file inside the server folder to `.env` and fill all the values.
+Rename the [.env.template]('/server/.env.template') file inside the server folder to `.env` and fill all the values.
 
 ### Running locally
 
