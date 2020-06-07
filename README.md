@@ -9,24 +9,24 @@ The primary goal of this project is to explore different full stack development 
 There's still a lot of room for discovering better design patterns and creating good development practices. So, I'll be improving the code and adding some new (maybe unnecessary :P) features as I learn more over time!
 
 ### Built with
-
-**Stack MERN**
-
-**Backend**: NodeJs, Express
-**Frontend**: React(Hooks), React-Router, Material-UI, ChartJs
-**Database**: MongoDB (atlas), Mongoose
-**Authentication**: Json Web Tokens
-**Password-Hashing**: BcryptJs
-**Web Socket**: Socket.io
-
-**Sentiment Analyzer**
-Currently uses this sentiment module that uses AFINN-165 wordlist and Emoji Sentiment Ranking to perform sentiment analysis on the messages (Accuracy > 70%).
-
+    
+**Stack MERN**    
+    
+**Backend**: NodeJs, Express   
+**Frontend**: React(Hooks), React-Router, Material-UI, ChartJs   
+**Database**: MongoDB (atlas), Mongoose    
+**Authentication**: Json Web Tokens    
+**Password-Hashing**: BcryptJs   
+**Web Socket**: Socket.io   
+    
+**Sentiment Analyzer**   
+Currently uses this sentiment module that uses AFINN-165 wordlist and Emoji Sentiment Ranking to perform sentiment analysis on the messages (Accuracy > 70%).   
+    
 ## Getting started
-
+    
 ### Prerequisites
 
-- Nodejs
+- Nodejs   
 - Mongo
 
 ### Installation
