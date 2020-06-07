@@ -20,6 +20,7 @@ There's still a lot of room for discovering better design patterns and creating 
     
 **Sentiment Analyzer**   
 Currently uses [this](https://www.npmjs.com/package/sentiment) module that uses [AFINN-165](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html) wordlist and [Emoji Sentiment Ranking](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0144296) to perform sentiment analysis on the messages (Accuracy > 70%).
+(Will be adding my own sentiment analysis classifier later.)
     
 ## Getting started
     
