@@ -44,3 +44,7 @@ Inside project folder: ```cd ChatBoard```:
 - `npm start` to run both client and server.
 - `cd server && npm start` to run only server.
 - `cd client && npm start` to run only client.
+
+## Screenshots
+
+<img src="https://i.postimg.cc/sfZSMdhW/1.jpg" alt="dashboard"/>
