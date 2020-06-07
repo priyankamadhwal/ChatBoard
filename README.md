@@ -8,7 +8,7 @@ The primary goal of this project is to explore different full stack development 
 
 There's still a lot of room for discovering better design patterns and creating good development practices. So, I'll be improving the code and adding some new (maybe unnecessary :P) features as I learn more over time!
 
-### Built with (Dependencies)
+### Built with
     
 **Stack MERN**    
 **Backend**: [NodeJs](https://nodejs.org/en/), [Express](https://expressjs.com/)   
