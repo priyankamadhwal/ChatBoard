@@ -16,7 +16,7 @@
     "jwt-then": "^1.0.1",
     "mongoose": "^5.9.16",
     "sentiment": "^5.0.2",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
